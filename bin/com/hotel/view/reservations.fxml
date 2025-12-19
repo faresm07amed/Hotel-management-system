@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.hotel.controller.ReservationController" stylesheets="@styles.css">
+    
+    <!-- Top Navigation Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-panel" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="15" left="20" right="20" top="15"/>
+            </padding>
+            <Label text="Hotel Management System" styleClass="header-label" textFill="white"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Dashboard" styleClass="nav-button" onAction="#goToDashboard"/>
+            <Button text="Guests" styleClass="nav-button" onAction="#goToGuests"/>
+            <Button text="Rooms" styleClass="nav-button" onAction="#goToRooms"/>
+            <Button text="Reservations" styleClass="nav-button" onAction="#goToReservations"/>
+            <Button text="Payments" styleClass="nav-button" onAction="#goToPayments"/>
+            <Button text="Services" styleClass="nav-button" onAction="#goToServices"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+            <VBox spacing="25" styleClass="content-panel">
+                <padding>
+                    <Insets bottom="30" left="30" right="30" top="30"/>
+                </padding>
+
+                <!-- Header Section -->
+                <VBox spacing="10">
+                    <Label text="Reservations Management" styleClass="header-label"/>
+                    <Label text="Manage room bookings and reservations" styleClass="sub-header-label"/>
+                </VBox>
+
+                <!-- Search and Filter Section -->
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField" promptText="Search by guest name or reservation ID..." prefWidth="350" onKeyReleased="#searchReservations"/>
+                    <Button text="Search" styleClass="button" onAction="#searchReservations"/>
+                    <Button text="Clear" styleClass="button" onAction="#clearSearch"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Filter:" styleClass="form-label"/>
+                    <ComboBox fx:id="statusFilter" promptText="Status" prefWidth="150" onAction="#applyFilters"/>
+                    <Button text="New Reservation" styleClass="primary-button" onAction="#showAddReservationForm"/>
+                    <Button text="Refresh" styleClass="button" onAction="#refreshReservations"/>
+                </HBox>
+
+                <!-- Reservations Table -->
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <Label text="All Reservations" styleClass="sub-header-label"/>
+                    <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="guestNameColumn" text="Guest Name" prefWidth="180"/>
+                            <TableColumn fx:id="roomNumberColumn" text="Room" prefWidth="100"/>
+                            <TableColumn fx:id="checkInColumn" text="Check-In" prefWidth="120"/>
+                            <TableColumn fx:id="checkOutColumn" text="Check-Out" prefWidth="120"/>
+                            <TableColumn fx:id="nightsColumn" text="Nights" prefWidth="80"/>
+                            <TableColumn fx:id="totalPriceColumn" text="Total Price" prefWidth="120"/>
+                            <TableColumn fx:id="statusColumn" text="Status" prefWidth="130"/>
+                            <TableColumn fx:id="notesColumn" text="Notes" prefWidth="200"/>
+                        </columns>
+                    </TableView>
+                    
+                    <!-- Table Action Buttons -->
+                    <HBox spacing="10">
+                        <Button text="View Details" styleClass="button" onAction="#viewReservationDetails"/>
+                        <Button text="Edit Selected" styleClass="warning-button" onAction="#editReservation"/>
+                        <Button text="Check In" styleClass="primary-button" onAction="#checkInReservation"/>
+                        <Button text="Check Out" styleClass="primary-button" onAction="#checkOutReservation"/>
+                        <Button text="Cancel Reservation" styleClass="danger-button" onAction="#cancelReservation"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Reservation Form Panel (Hidden by default) -->
+                <VBox fx:id="reservationFormPanel" spacing="15" styleClass="form-grid" visible="false" managed="false">
+                    <Label text="Reservation Details" styleClass="sub-header-label"/>
+                    
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="130" prefWidth="130"/>
+                            <ColumnConstraints minWidth="300" prefWidth="400" hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        
+                        <!-- Guest Selection -->
+                        <Label text="Guest:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <ComboBox fx:id="guestComboBox" promptText="Select guest" prefWidth="350" HBox.hgrow="ALWAYS"/>
+                            <Button text="New Guest" styleClass="button" onAction="#goToGuests"/>
+                        </HBox>
+                        
+                        <!-- Room Selection -->
+                        <Label text="Room:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <ComboBox fx:id="roomComboBox" promptText="Select available room" prefWidth="350" onAction="#calculateTotal" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="roomPriceLabel" text="$0.00/night" styleClass="form-label"/>
+                        </HBox>
+                        
+                        <!-- Check-In Date -->
+                        <Label text="Check-In Date:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <DatePicker fx:id="checkInDatePicker" promptText="Select check-in date" prefWidth="400" onAction="#calculateTotal" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <!-- Check-Out Date -->
+                        <Label text="Check-Out Date:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <DatePicker fx:id="checkOutDatePicker" promptText="Select check-out date" prefWidth="400" onAction="#calculateTotal" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        
+                        <!-- Number of Nights -->
+                        <Label text="Number of Nights:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <Label fx:id="numberOfNightsLabel" text="0 nights" styleClass="form-label" textFill="#3498db" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        
+                        <!-- Total Price -->
+                        <Label text="Total Price:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <Label fx:id="totalPriceLabel" text="$0.00" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #27ae60;" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        
+                        <!-- Status -->
+                        <Label text="Status:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                        <ComboBox fx:id="statusComboBox" promptText="Select status" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                        
+                        <!-- Notes -->
+                        <Label text="Notes:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                        <TextArea fx:id="notesArea" promptText="Special requests or notes" wrapText="true" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                    </GridPane>
+                    
+                    <!-- Form Action Buttons -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Save Reservation" styleClass="primary-button" onAction="#saveReservation"/>
+                        <Button text="Cancel" styleClass="button" onAction="#cancelReservationForm"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="conflictWarningLabel" text="" styleClass="form-label" textFill="#e74c3c"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

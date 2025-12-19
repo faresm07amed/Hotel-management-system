@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.hotel.controller.PaymentController" stylesheets="@styles.css">
+    
+    <!-- Top Navigation Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-panel" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="15" left="20" right="20" top="15"/>
+            </padding>
+            <Label text="Hotel Management System" styleClass="header-label" textFill="white"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Dashboard" styleClass="nav-button" onAction="#goToDashboard"/>
+            <Button text="Guests" styleClass="nav-button" onAction="#goToGuests"/>
+            <Button text="Rooms" styleClass="nav-button" onAction="#goToRooms"/>
+            <Button text="Reservations" styleClass="nav-button" onAction="#goToReservations"/>
+            <Button text="Payments" styleClass="nav-button" onAction="#goToPayments"/>
+            <Button text="Services" styleClass="nav-button" onAction="#goToServices"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+            <VBox spacing="25" styleClass="content-panel">
+                <padding>
+                    <Insets bottom="30" left="30" right="30" top="30"/>
+                </padding>
+
+                <!-- Header Section -->
+                <VBox spacing="10">
+                    <Label text="Payments Management" styleClass="header-label"/>
+                    <Label text="Record and track payments for reservations" styleClass="sub-header-label"/>
+                </VBox>
+
+                <!-- Search and Filter Section -->
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField" promptText="Search by guest name or transaction ID..." prefWidth="350" onKeyReleased="#searchPayments"/>
+                    <Button text="Search" styleClass="button" onAction="#searchPayments"/>
+                    <Button text="Clear" styleClass="button" onAction="#clearSearch"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Filter:" styleClass="form-label"/>
+                    <ComboBox fx:id="methodFilter" promptText="Payment Method" prefWidth="150" onAction="#applyFilters"/>
+                    <ComboBox fx:id="statusFilter" promptText="Status" prefWidth="130" onAction="#applyFilters"/>
+                    <Button text="Record Payment" styleClass="primary-button" onAction="#showAddPaymentForm"/>
+                    <Button text="Refresh" styleClass="button" onAction="#refreshPayments"/>
+                </HBox>
+
+                <!-- Statistics Cards -->
+                <GridPane hgap="20" vgap="15">
+                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15"/>
+                        </padding>
+                        <Label text="Total Payments" styleClass="stat-label"/>
+                        <Label fx:id="totalPaymentsLabel" text="0" styleClass="stat-value" textFill="#3498db"/>
+                    </VBox>
+                    
+                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15"/>
+                        </padding>
+                        <Label text="Completed" styleClass="stat-label"/>
+                        <Label fx:id="completedPaymentsLabel" text="0" styleClass="stat-value" textFill="#27ae60"/>
+                    </VBox>
+                    
+                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15"/>
+                        </padding>
+                        <Label text="Total Revenue" styleClass="stat-label"/>
+                        <Label fx:id="totalRevenueLabel" text="$0.00" styleClass="stat-value" textFill="#27ae60"/>
+                    </VBox>
+                </GridPane>
+
+                <!-- Payments Table -->
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <Label text="Payment Records" styleClass="sub-header-label"/>
+                    <TableView fx:id="paymentsTable" VBox.vgrow="ALWAYS" prefHeight="350">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="reservationIdColumn" text="Reservation" prefWidth="100"/>
+                            <TableColumn fx:id="guestNameColumn" text="Guest Name" prefWidth="180"/>
+                            <TableColumn fx:id="amountColumn" text="Amount" prefWidth="120"/>
+                            <TableColumn fx:id="methodColumn" text="Method" prefWidth="150"/>
+                            <TableColumn fx:id="dateColumn" text="Date" prefWidth="180"/>
+                            <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+                            <TableColumn fx:id="transactionIdColumn" text="Transaction ID" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                    
+                    <!-- Table Action Buttons -->
+                    <HBox spacing="10">
+                        <Button text="View Receipt" styleClass="button" onAction="#viewReceipt"/>
+                        <Button text="Print Receipt" styleClass="primary-button" onAction="#printReceipt"/>
+                        <Button text="Refund Payment" styleClass="danger-button" onAction="#refundPayment"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Payment Form Panel (Hidden by default) -->
+                <VBox fx:id="paymentFormPanel" spacing="15" styleClass="form-grid" visible="false" managed="false">
+                    <Label text="Payment Details" styleClass="sub-header-label"/>
+                    
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="130" prefWidth="130"/>
+                            <ColumnConstraints minWidth="300" prefWidth="400" hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        
+                        <!-- Reservation Selection -->
+                        <Label text="Reservation:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <ComboBox fx:id="reservationComboBox" promptText="Select reservation" prefWidth="350" onAction="#onReservationSelected" HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="reservationTotalLabel" text="Total: $0.00" styleClass="form-label" textFill="#3498db"/>
+                        </HBox>
+                        
+                        <!-- Amount -->
+                        <Label text="Amount ($):" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="amountField" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        
+                        <!-- Payment Method -->
+                        <Label text="Payment Method:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <ComboBox fx:id="methodComboBox" promptText="Select payment method" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <!-- Transaction ID -->
+                        <Label text="Transaction ID:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="transactionIdField" promptText="Optional - for card/online payments" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        
+                        <!-- Payment Status -->
+                        <Label text="Status:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="paymentStatusComboBox" promptText="Select status" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        
+                        <!-- Notes -->
+                        <Label text="Notes:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextArea fx:id="notesArea" promptText="Additional notes" wrapText="true" prefRowCount="2" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+                    
+                    <!-- Form Action Buttons -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Record Payment" styleClass="primary-button" onAction="#savePayment"/>
+                        <Button text="Cancel" styleClass="button" onAction="#cancelPaymentForm"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

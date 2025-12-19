@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.hotel.controller.ServiceController" stylesheets="@styles.css">
+    
+    <!-- Top Navigation Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-panel" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="15" left="20" right="20" top="15"/>
+            </padding>
+            <Label text="Hotel Management System" styleClass="header-label" textFill="white"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Dashboard" styleClass="nav-button" onAction="#goToDashboard"/>
+            <Button text="Guests" styleClass="nav-button" onAction="#goToGuests"/>
+            <Button text="Rooms" styleClass="nav-button" onAction="#goToRooms"/>
+            <Button text="Reservations" styleClass="nav-button" onAction="#goToReservations"/>
+            <Button text="Payments" styleClass="nav-button" onAction="#goToPayments"/>
+            <Button text="Services" styleClass="nav-button" onAction="#goToServices"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+            <VBox spacing="25" styleClass="content-panel">
+                <padding>
+                    <Insets bottom="30" left="30" right="30" top="30"/>
+                </padding>
+
+                <!-- Header Section -->
+                <VBox spacing="10">
+                    <Label text="Services Management" styleClass="header-label"/>
+                    <Label text="Manage hotel services and amenities catalog" styleClass="sub-header-label"/>
+                </VBox>
+
+                <!-- Search and Filter Section -->
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField" promptText="Search services..." prefWidth="300" onKeyReleased="#searchServices"/>
+                    <Button text="Search" styleClass="button" onAction="#searchServices"/>
+                    <Button text="Clear" styleClass="button" onAction="#clearSearch"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Filter by Category:" styleClass="form-label"/>
+                    <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="180" onAction="#filterByCategory"/>
+                    <CheckBox fx:id="activeOnlyCheckbox" text="Active Only" selected="true" onAction="#refreshServices"/>
+                    <Button text="Add Service" styleClass="primary-button" onAction="#showAddServiceForm"/>
+                    <Button text="Refresh" styleClass="button" onAction="#refreshServices"/>
+                </HBox>
+
+                <!-- Services Table -->
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <Label text="Services Catalog" styleClass="sub-header-label"/>
+                    <TableView fx:id="servicesTable" VBox.vgrow="ALWAYS" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="nameColumn" text="Service Name" prefWidth="200"/>
+                            <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="300"/>
+                            <TableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
+                            <TableColumn fx:id="priceColumn" text="Price" prefWidth="100"/>
+                            <TableColumn fx:id="activeColumn" text="Status" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                    
+                    <!-- Table Action Buttons -->
+                    <HBox spacing="10">
+                        <Button text="Edit Selected" styleClass="warning-button" onAction="#editService"/>
+                        <Button text="Delete Selected" styleClass="danger-button" onAction="#deleteService"/>
+                        <Button text="Toggle Active Status" styleClass="button" onAction="#toggleServiceStatus"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Service Form Panel (Hidden by default) -->
+                <VBox fx:id="serviceFormPanel" spacing="15" styleClass="form-grid" visible="false" managed="false">
+                    <Label text="Service Details" styleClass="sub-header-label"/>
+                    
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="120" prefWidth="120"/>
+                            <ColumnConstraints minWidth="300" prefWidth="400" hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        
+                        <!-- Service Name -->
+                        <Label text="Service Name:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="nameField" promptText="Enter service name" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        
+                        <!-- Category -->
+                        <Label text="Category:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="categoryComboBox" promptText="Select category" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        
+                        <!-- Price -->
+                        <Label text="Price ($):" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="priceField" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <!-- Description -->
+                        <Label text="Description:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextArea fx:id="descriptionArea" promptText="Enter service description" wrapText="true" prefRowCount="4" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        
+                        <!-- Active Status -->
+                        <Label text="Active:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <CheckBox fx:id="isActiveCheckbox" text="Service is active and available" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    </GridPane>
+                    
+                    <!-- Form Action Buttons -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Save Service" styleClass="primary-button" onAction="#saveService"/>
+                        <Button text="Cancel" styleClass="button" onAction="#cancelServiceForm"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

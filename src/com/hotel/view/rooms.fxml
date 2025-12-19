@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.hotel.controller.RoomController" stylesheets="@styles.css">
+    
+    <!-- Top Navigation Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-panel" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="15" left="20" right="20" top="15"/>
+            </padding>
+            <Label text="Hotel Management System" styleClass="header-label" textFill="white"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Dashboard" styleClass="nav-button" onAction="#goToDashboard"/>
+            <Button text="Guests" styleClass="nav-button" onAction="#goToGuests"/>
+            <Button text="Rooms" styleClass="nav-button" onAction="#goToRooms"/>
+            <Button text="Reservations" styleClass="nav-button" onAction="#goToReservations"/>
+            <Button text="Payments" styleClass="nav-button" onAction="#goToPayments"/>
+            <Button text="Services" styleClass="nav-button" onAction="#goToServices"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+            <VBox spacing="25" styleClass="content-panel">
+                <padding>
+                    <Insets bottom="30" left="30" right="30" top="30"/>
+                </padding>
+
+                <!-- Header Section -->
+                <VBox spacing="10">
+                    <Label text="Room Management" styleClass="header-label"/>
+                    <Label text="Manage hotel rooms inventory and availability" styleClass="sub-header-label"/>
+                </VBox>
+
+                <!-- Search and Filter Section -->
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField" promptText="Search by room number..." prefWidth="300" onKeyReleased="#searchRooms"/>
+                    <Button text="Search" styleClass="button" onAction="#searchRooms"/>
+                    <Button text="Clear" styleClass="button" onAction="#clearSearch"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Filter by:" styleClass="form-label"/>
+                    <ComboBox fx:id="typeFilter" promptText="Room Type" prefWidth="150" onAction="#applyFilters"/>
+                    <ComboBox fx:id="statusFilter" promptText="Status" prefWidth="150" onAction="#applyFilters"/>
+                    <Button text="Add Room" styleClass="primary-button" onAction="#showAddRoomForm"/>
+                    <Button text="Refresh" styleClass="button" onAction="#refreshRooms"/>
+                </HBox>
+
+                <!-- Statistics Cards -->
+                <GridPane hgap="20" vgap="15">
+                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15"/>
+                        </padding>
+                        <Label text="Total Rooms" styleClass="stat-label"/>
+                        <Label fx:id="totalRoomsLabel" text="0" styleClass="stat-value" textFill="#3498db"/>
+                    </VBox>
+                    
+                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15"/>
+                        </padding>
+                        <Label text="Available" styleClass="stat-label"/>
+                        <Label fx:id="availableRoomsLabel" text="0" styleClass="stat-value" textFill="#27ae60"/>
+                    </VBox>
+                    
+                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15"/>
+                        </padding>
+                        <Label text="Occupied" styleClass="stat-label"/>
+                        <Label fx:id="occupiedRoomsLabel" text="0" styleClass="stat-value" textFill="#e74c3c"/>
+                    </VBox>
+                    
+                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets bottom="15" left="15" right="15" top="15"/>
+                        </padding>
+                        <Label text="Maintenance" styleClass="stat-label"/>
+                        <Label fx:id="maintenanceRoomsLabel" text="0" styleClass="stat-value" textFill="#f39c12"/>
+                    </VBox>
+                </GridPane>
+
+                <!-- Rooms Table -->
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <Label text="Rooms Inventory" styleClass="sub-header-label"/>
+                    <TableView fx:id="roomsTable" VBox.vgrow="ALWAYS" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="roomNumberColumn" text="Room Number" prefWidth="120"/>
+                            <TableColumn fx:id="typeColumn" text="Type" prefWidth="150"/>
+                            <TableColumn fx:id="maxOccupancyColumn" text="Max Occupancy" prefWidth="120"/>
+                            <TableColumn fx:id="priceColumn" text="Price/Night" prefWidth="120"/>
+                            <TableColumn fx:id="statusColumn" text="Status" prefWidth="150"/>
+                            <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="300"/>
+                        </columns>
+                    </TableView>
+                    
+                    <!-- Table Action Buttons -->
+                    <HBox spacing="10">
+                        <Button text="Edit Selected" styleClass="warning-button" onAction="#editRoom"/>
+                        <Button text="Delete Selected" styleClass="danger-button" onAction="#deleteRoom"/>
+                        <Button text="Change Status" styleClass="button" onAction="#changeRoomStatus"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Room Form Panel (Hidden by default) -->
+                <VBox fx:id="roomFormPanel" spacing="15" styleClass="form-grid" visible="false" managed="false">
+                    <Label text="Room Details" styleClass="sub-header-label"/>
+                    
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="120" prefWidth="120"/>
+                            <ColumnConstraints minWidth="300" prefWidth="400" hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        
+                        <!-- Room Number -->
+                        <Label text="Room Number:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="roomNumberField" promptText="e.g., 101, 202" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        
+                        <!-- Room Type -->
+                        <Label text="Room Type:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="typeComboBox" promptText="Select room type" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        
+                        <!-- Max Occupancy -->
+                        <Label text="Max Occupancy:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="maxOccupancyField" promptText="Maximum number of guests" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <!-- Price Per Night -->
+                        <Label text="Price/Night ($):" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="pricePerNightField" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        
+                        <!-- Status -->
+                        <Label text="Status:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="statusComboBox" promptText="Select room status" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        
+                        <!-- Description -->
+                        <Label text="Description:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextArea fx:id="descriptionArea" promptText="Room features and amenities" wrapText="true" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+                    
+                    <!-- Form Action Buttons -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Save Room" styleClass="primary-button" onAction="#saveRoom"/>
+                        <Button text="Cancel" styleClass="button" onAction="#cancelRoomForm"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
