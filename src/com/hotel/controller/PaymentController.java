@@ -158,30 +158,52 @@ public class PaymentController {
 
     @FXML
     private void refreshPayments() {
-        allPayments = paymentDAO.getAllPayments();
-        paymentsTable.setItems(allPayments);
-        updateStatistics();
+        try {
+            allPayments = paymentDAO.getAllPayments();
+            if (allPayments != null) {
+                paymentsTable.setItems(allPayments);
+            } else {
+                allPayments = FXCollections.observableArrayList();
+                paymentsTable.setItems(allPayments);
+            }
+            updateStatistics();
+        } catch (Exception e) {
+            System.err.println("Error refreshing payments: " + e.getMessage());
+            allPayments = FXCollections.observableArrayList();
+            paymentsTable.setItems(allPayments);
+        }
     }
 
     private void updateStatistics() {
-        if (allPayments == null) {
-            allPayments = paymentDAO.getAllPayments();
-        }
-
-        totalPaymentsLabel.setText(String.valueOf(allPayments.size()));
-
-        int completed = 0;
-        double totalRevenue = 0.0;
-
-        for (Payment payment : allPayments) {
-            if (payment.getStatus() == PaymentStatus.COMPLETED) {
-                completed++;
-                totalRevenue += payment.getAmount();
+        try {
+            if (allPayments == null) {
+                allPayments = paymentDAO.getAllPayments();
+                if (allPayments == null) {
+                    allPayments = FXCollections.observableArrayList();
+                }
             }
-        }
 
-        completedPaymentsLabel.setText(String.valueOf(completed));
-        totalRevenueLabel.setText(String.format("$%.2f", totalRevenue));
+            totalPaymentsLabel.setText(String.valueOf(allPayments.size()));
+
+            int completed = 0;
+            double totalRevenue = 0.0;
+
+            for (Payment payment : allPayments) {
+                if (payment != null && payment.getStatus() == PaymentStatus.COMPLETED) {
+                    completed++;
+                    totalRevenue += payment.getAmount();
+                }
+            }
+
+            completedPaymentsLabel.setText(String.valueOf(completed));
+            totalRevenueLabel.setText(String.format("$%.2f", totalRevenue));
+        } catch (Exception e) {
+            System.err.println("Error updating statistics: " + e.getMessage());
+            // Set default values
+            totalPaymentsLabel.setText("0");
+            completedPaymentsLabel.setText("0");
+            totalRevenueLabel.setText("$0.00");
+        }
     }
 
     @FXML
@@ -242,29 +264,37 @@ public class PaymentController {
     }
 
     private void loadUnpaidReservations() {
-        // Load reservations that are checked in or checked out
-        ObservableList<Reservation> allReservations = reservationDAO.getAllReservations();
-        ObservableList<Reservation> unpaidReservations = FXCollections.observableArrayList();
+        try {
+            // Load reservations that are checked in or checked out
+            ObservableList<Reservation> allReservations = reservationDAO.getAllReservations();
+            if (allReservations == null) {
+                allReservations = FXCollections.observableArrayList();
+            }
+            ObservableList<Reservation> unpaidReservations = FXCollections.observableArrayList();
 
-        for (Reservation res : allReservations) {
-            if (res.getStatus() == ReservationStatus.CHECKED_IN ||
-                    res.getStatus() == ReservationStatus.CHECKED_OUT) {
-                // Check if already paid
-                ObservableList<Payment> payments = paymentDAO.getPaymentsByReservation(res.getId());
-                boolean isPaid = false;
-                for (Payment p : payments) {
-                    if (p.getStatus() == PaymentStatus.COMPLETED) {
-                        isPaid = true;
-                        break;
+            for (Reservation res : allReservations) {
+                if (res.getStatus() == ReservationStatus.CHECKED_IN ||
+                        res.getStatus() == ReservationStatus.CHECKED_OUT) {
+                    // Check if already paid
+                    ObservableList<Payment> payments = paymentDAO.getPaymentsByReservation(res.getId());
+                    boolean isPaid = false;
+                    for (Payment p : payments) {
+                        if (p.getStatus() == PaymentStatus.COMPLETED) {
+                            isPaid = true;
+                            break;
+                        }
+                    }
+                    if (!isPaid) {
+                        unpaidReservations.add(res);
                     }
                 }
-                if (!isPaid) {
-                    unpaidReservations.add(res);
-                }
             }
-        }
 
-        reservationComboBox.setItems(unpaidReservations);
+            reservationComboBox.setItems(unpaidReservations);
+        } catch (Exception e) {
+            System.err.println("Error loading unpaid reservations: " + e.getMessage());
+            reservationComboBox.setItems(FXCollections.observableArrayList());
+        }
     }
 
     @FXML

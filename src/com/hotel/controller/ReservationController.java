@@ -157,8 +157,19 @@ public class ReservationController {
 
     @FXML
     private void refreshReservations() {
-        allReservations = reservationDAO.getAllReservations();
-        reservationsTable.setItems(allReservations);
+        try {
+            allReservations = reservationDAO.getAllReservations();
+            if (allReservations != null) {
+                reservationsTable.setItems(allReservations);
+            } else {
+                allReservations = FXCollections.observableArrayList();
+                reservationsTable.setItems(allReservations);
+            }
+        } catch (Exception e) {
+            System.err.println("Error refreshing reservations: " + e.getMessage());
+            allReservations = FXCollections.observableArrayList();
+            reservationsTable.setItems(allReservations);
+        }
     }
 
     @FXML
@@ -209,11 +220,27 @@ public class ReservationController {
     }
 
     private void loadGuestsAndRooms() {
-        // Load all guests
-        guestComboBox.setItems(guestDAO.getAllGuests());
+        try {
+            // Load all guests
+            ObservableList<Guest> guests = guestDAO.getAllGuests();
+            if (guests != null) {
+                guestComboBox.setItems(guests);
+            } else {
+                guestComboBox.setItems(FXCollections.observableArrayList());
+            }
 
-        // Load available rooms
-        roomComboBox.setItems(roomDAO.getRoomsByStatus(RoomStatus.AVAILABLE));
+            // Load available rooms
+            ObservableList<Room> rooms = roomDAO.getRoomsByStatus(RoomStatus.AVAILABLE);
+            if (rooms != null) {
+                roomComboBox.setItems(rooms);
+            } else {
+                roomComboBox.setItems(FXCollections.observableArrayList());
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading guests and rooms: " + e.getMessage());
+            guestComboBox.setItems(FXCollections.observableArrayList());
+            roomComboBox.setItems(FXCollections.observableArrayList());
+        }
     }
 
     @FXML
