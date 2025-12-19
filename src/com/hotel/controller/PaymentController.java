@@ -147,8 +147,13 @@ public class PaymentController {
         methodFilter.setItems(FXCollections.observableArrayList(PaymentMethod.values()));
         statusFilter.setItems(FXCollections.observableArrayList(PaymentStatus.values()));
 
-        refreshPayments();
-        updateStatistics();
+        try {
+            refreshPayments();
+            updateStatistics();
+        } catch (Exception e) {
+            System.err.println("Warning: Could not load payments from database: " + e.getMessage());
+            // View will load anyway, just with empty table
+        }
     }
 
     @FXML

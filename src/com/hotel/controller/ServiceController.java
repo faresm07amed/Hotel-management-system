@@ -102,7 +102,12 @@ public class ServiceController {
         ObservableList<ServiceCategory> filterOptions = FXCollections.observableArrayList(ServiceCategory.values());
         categoryFilter.setItems(filterOptions);
 
-        refreshServices();
+        try {
+            refreshServices();
+        } catch (Exception e) {
+            System.err.println("Warning: Could not load services from database: " + e.getMessage());
+            // View will load anyway, just with empty table
+        }
     }
 
     @FXML

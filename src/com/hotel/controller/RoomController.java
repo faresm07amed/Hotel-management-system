@@ -118,8 +118,13 @@ public class RoomController {
         typeFilter.setItems(FXCollections.observableArrayList(RoomType.values()));
         statusFilter.setItems(FXCollections.observableArrayList(RoomStatus.values()));
 
-        refreshRooms();
-        updateStatistics();
+        try {
+            refreshRooms();
+            updateStatistics();
+        } catch (Exception e) {
+            System.err.println("Warning: Could not load rooms from database: " + e.getMessage());
+            // View will load anyway, just with empty table
+        }
     }
 
     @FXML

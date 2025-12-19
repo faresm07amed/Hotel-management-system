@@ -147,7 +147,12 @@ public class ReservationController {
         statusComboBox.setItems(FXCollections.observableArrayList(ReservationStatus.values()));
         statusFilter.setItems(FXCollections.observableArrayList(ReservationStatus.values()));
 
-        refreshReservations();
+        try {
+            refreshReservations();
+        } catch (Exception e) {
+            System.err.println("Warning: Could not load reservations from database: " + e.getMessage());
+            // View will load anyway, just with empty table
+        }
     }
 
     @FXML
