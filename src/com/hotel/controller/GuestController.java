@@ -56,7 +56,12 @@ public class GuestController {
         idNumberColumn.setCellValueFactory(cellData -> cellData.getValue().idNumberProperty());
         addressColumn.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
 
-        refreshGuests();
+        try {
+            refreshGuests();
+        } catch (Exception e) {
+            System.err.println("Warning: Could not load guests from database: " + e.getMessage());
+            // View will load anyway, just with empty table
+        }
     }
 
     @FXML

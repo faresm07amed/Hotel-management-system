@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.hotel.controller.DashboardController" stylesheets="@styles.css"
-            style="-fx-background-image: url('../assests/dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
+            fx:controller="com.hotel.controller.DashboardController"
+            style="-fx-background-image: url('dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
     
     <!-- Left Sidebar Navigation -->
     <left>
@@ -41,8 +41,7 @@
 
     <!-- Main Content Area -->
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #F3EDDF transparent;
-            -fx-background-image: url('../assests/dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
+        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #F3EDDF transparent;">
             <VBox spacing="30" style="-fx-padding: 30;">
                 
                 <!-- Page Header -->
