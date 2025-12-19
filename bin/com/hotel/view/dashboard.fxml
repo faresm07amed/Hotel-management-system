@@ -41,7 +41,7 @@
 
     <!-- Main Content Area -->
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #F3EDDF transparent;">
+        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #F3EDDF; -fx-background: #F3EDDF; -fx-border-color: transparent;">
             <VBox spacing="30" style="-fx-padding: 30;">
                 
                 <!-- Page Header -->
