@@ -10,7 +10,7 @@
     
     <!-- Left Sidebar Navigation -->
     <left>
-        <VBox style="-fx-background-color: #588157; -fx-min-width: 250px; -fx-max-width: 250px;">
+        <VBox style="-fx-background-color: #236023; -fx-min-width: 250px; -fx-max-width: 250px;">
             <!-- Sidebar Header -->
             <VBox style="-fx-background-color: #344E41D4; -fx-padding: 20;">
                 <Label text="Hotel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
@@ -26,15 +26,15 @@
                 <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
                         style="-fx-background-color: #FFEDD8; -fx-text-fill: #588157; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT; -fx-font-weight: bold;"/>
                 <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
-                        style="-fx-background-color: transparent; -fx-text-fill: #94a3b8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="🏠 Rooms" onAction="#goToRooms" maxWidth="Infinity"
-                        style="-fx-background-color: transparent; -fx-text-fill: #94a3b8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="📅 Reservations" onAction="#goToReservations" maxWidth="Infinity"
-                        style="-fx-background-color: transparent; -fx-text-fill: #94a3b8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="💰 Payments" onAction="#goToPayments" maxWidth="Infinity"
-                        style="-fx-background-color: transparent; -fx-text-fill: #94a3b8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="🛎️ Services" onAction="#goToServices" maxWidth="Infinity"
-                        style="-fx-background-color: transparent; -fx-text-fill: #94a3b8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
             </VBox>
         </VBox>
     </left>
