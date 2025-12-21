@@ -15,8 +15,8 @@ public class HotelManagementApp extends Application {
         // Set up navigation utility
         NavigationUtil.setPrimaryStage(primaryStage);
 
-        // Load dashboard (handles scene creation and primaryStage.show())
-        NavigationUtil.loadDashboard();
+        // Load login page (handles scene creation and primaryStage.show())
+        NavigationUtil.loadLogin();
     }
 
     public static void main(String[] args) {

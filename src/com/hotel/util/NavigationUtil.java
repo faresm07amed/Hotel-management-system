@@ -44,6 +44,10 @@ public class NavigationUtil {
         }
     }
 
+    public static void loadLogin() {
+        loadView("/com/hotel/view/login.fxml");
+    }
+
     public static void loadDashboard() {
         loadView("/com/hotel/view/dashboard.fxml");
     }

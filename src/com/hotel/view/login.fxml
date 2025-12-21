@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<HBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controller.LoginController" stylesheets="@styles.css">
+    <children>
+        <!-- Left Side: Branding Panel -->
+        <VBox alignment="CENTER" prefWidth="450.0" styleClass="login-branding-panel" HBox.hgrow="ALWAYS" spacing="20">
+            <padding>
+                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            </padding>
+            <ImageView fx:id="logoImageView" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/logo.png" />
+                </image>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="branding-title" text="HOTEL MANAGEMENT" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="branding-subtitle" text="BugHunters Official Suite" />
+        </VBox>
+
+        <!-- Right Side: Login Form Panel -->
+        <VBox alignment="CENTER" prefWidth="450.0" styleClass="login-form-panel" HBox.hgrow="ALWAYS" spacing="30">
+            <padding>
+                <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+            </padding>
+            <VBox spacing="10" alignment="CENTER_LEFT">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-header" text="Welcome Back" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-sub-header" text="Please login to your account" />
+            </VBox>
+            
+            <VBox spacing="20">
+                <VBox spacing="8">
+                    <Label text="Username" styleClass="form-label"/>
+                    <TextField fx:id="usernameField" promptText="Enter your username" styleClass="login-field" />
+                </VBox>
+                
+                <VBox spacing="8">
+                    <Label text="Password" styleClass="form-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="login-field" />
+                </VBox>
+            </VBox>
+
+            <Button fx:id="loginButton" maxWidth="Infinity" mnemonicParsing="Parsing" onAction="#handleLogin" prefHeight="45.0" styleClass="login-button" text="SIGN IN" />
+            
+            <Label fx:id="errorLabel" styleClass="error-text" text="" visible="false" />
+        </VBox>
+    </children>
+</HBox>
