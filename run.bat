@@ -4,7 +4,7 @@ REM Hotel Management System - Run Script
 set JAVAFX_LIB=javafx-sdk-17.0.2\lib
 set MYSQL_JAR=mysql-connector-j-8.0.33.jar
 set MODULE_PATH=%JAVAFX_LIB%;%MYSQL_JAR%
-
+/
 echo === Hotel Management System ===
 echo.
 
