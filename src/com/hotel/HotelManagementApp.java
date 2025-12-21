@@ -9,18 +9,14 @@ public class HotelManagementApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Hotel Management System");
-        primaryStage.setWidth(1200);
-        primaryStage.setHeight(800);
-        primaryStage.setMinWidth(1000);
+        primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
 
         // Set up navigation utility
         NavigationUtil.setPrimaryStage(primaryStage);
 
-        // Load dashboard
+        // Load dashboard (handles scene creation and primaryStage.show())
         NavigationUtil.loadDashboard();
-
-        primaryStage.show();
     }
 
     public static void main(String[] args) {
