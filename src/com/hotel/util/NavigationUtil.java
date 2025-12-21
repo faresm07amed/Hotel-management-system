@@ -75,4 +75,8 @@ public class NavigationUtil {
     public static void loadServices() {
         loadView("/com/hotel/view/services.fxml");
     }
+
+    public static void loadAbout() {
+        loadView("/com/hotel/view/about.fxml");
+    }
 }

@@ -16,8 +16,8 @@
                 <Label text="BugHunters" style="-fx-text-fill: #588157; -fx-font-size: 24px; -fx-font-weight: bold;"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <HBox spacing="10" alignment="CENTER">
-                    <Label text="Home" styleClass="nav-link"/>
-                    <Label text="About Us" styleClass="nav-link"/>
+                    <Label text="Home" onMouseClicked="#goToHome" styleClass="nav-link"/>
+                    <Label text="About Us" onMouseClicked="#goToAbout" styleClass="nav-link"/>
                     <Label text="Our Services" styleClass="nav-link"/>
                     <Label text="FAQ" styleClass="nav-link"/>
                     <Label text="Contact" styleClass="nav-link"/>

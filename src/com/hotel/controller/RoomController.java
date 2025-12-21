@@ -429,4 +429,9 @@ public class RoomController {
     private void goToServices() {
         NavigationUtil.loadServices();
     }
+
+    @FXML
+    public void goToAbout() {
+        NavigationUtil.loadAbout();
+    }
 }

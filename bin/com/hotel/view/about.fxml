@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controller.AboutController" stylesheets="@styles.css">
+    <left>
+        <VBox style="-fx-background-color: #236023; -fx-min-width: 250px; -fx-max-width: 250px;">
+            <VBox style="-fx-background-color: #344E41D4; -fx-padding: 20;">
+                <Label text="Hotel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="Management" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            </VBox>
+            
+            <VBox spacing="2">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🏠 Home" onAction="#goToHome" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🏠 Rooms" onAction="#goToRooms" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="📅 Reservations" onAction="#goToReservations" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="💰 Payments" onAction="#goToPayments" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🛎️ Services" onAction="#goToServices" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="ℹ️ About Us" onAction="#goToAbout" maxWidth="Infinity"
+                        style="-fx-background-color: #FFEDD8; -fx-text-fill: #588157; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT; -fx-font-weight: bold;"/>
+            </VBox>
+        </VBox>
+    </left>
+    <center>
+    <ScrollPane fitToWidth="true" style="-fx-background-color: #F3EDDF;" hbarPolicy="NEVER">
+        <VBox style="-fx-background-color: #F3EDDF;">
+            
+            <!-- HEADER / NAVBAR -->
+            <HBox alignment="CENTER_LEFT" styleClass="home-navbar" style="-fx-padding: 20 60; -fx-background-color: #f3eddf;">
+                <Label text="BugHunters" style="-fx-text-fill: #588157; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="25" alignment="CENTER">
+                    <Label text="Home" onMouseClicked="#goToHome" style="-fx-text-fill: #344e41; -fx-cursor: hand;"/>
+                    <Label text="About Us" onMouseClicked="#goToAbout" style="-fx-text-fill: #344e41; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                    <Label text="Our Services" onMouseClicked="#goToServices" style="-fx-text-fill: #344e41; -fx-cursor: hand;"/>
+                    <Label text="Blog" style="-fx-text-fill: #344e41; -fx-cursor: hand;"/>
+                    <Label text="Contact Us" style="-fx-text-fill: #344e41; -fx-cursor: hand;"/>
+                    <Button text="Book Now" onAction="#goToReservations" style="-fx-background-color: #588157; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 20;"/>
+                </HBox>
+            </HBox>
+
+            <!-- LOGO SECTION -->
+            <VBox alignment="CENTER" spacing="20" style="-fx-padding: 40 0;">
+                <ImageView fitHeight="150" preserveRatio="true">
+                    <image>
+                        <Image url="@images/logo.png"/>
+                    </image>
+                </ImageView>
+                <Label text="جامعة برج العرب التكنولوجية" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                <Label text="BORJ ARAB TECHNOLOGICAL UNIVERSITY" style="-fx-font-size: 14px; -fx-text-fill: #344e41;"/>
+            </VBox>
+
+            <!-- TEAM SECTION -->
+            <VBox spacing="30" style="-fx-padding: 40 60;">
+                <Label text="Team member :" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                <GridPane hgap="40" vgap="20">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
+                    <Label text="Fares mohamed yassin" style="-fx-font-size: 20px; -fx-text-fill: #344e41;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label text="Alaa hamdoun abo bakr" style="-fx-font-size: 20px; -fx-text-fill: #344e41;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="Mohamed mostafa" style="-fx-font-size: 20px; -fx-text-fill: #344e41;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label text="Asmaa mohamed" style="-fx-font-size: 20px; -fx-text-fill: #344e41;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                </GridPane>
+            </VBox>
+
+            <!-- STRATEGY SECTION -->
+            <VBox spacing="30" style="-fx-background-color: #588157; -fx-padding: 60; -fx-background-radius: 20;">
+                <VBox.margin>
+                    <Insets left="40" right="40" top="40" bottom="40"/>
+                </VBox.margin>
+                <Label text="Providing Best Services &amp; Apartment&#10;Places According to Visitor Dreams" 
+                       wrapText="true" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                
+                <HBox spacing="40">
+                    <VBox prefWidth="400" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 30;" spacing="20">
+                        <Label text="Values List" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #344e41;"/>
+                        <VBox spacing="15">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="01" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #a3b18a;"/>
+                                <VBox>
+                                    <Label text="Presenting High-Quality Cleanliness" style="-fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                                    <Label text="Ensuring a clean and comfortable environment for every tenant." wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="02" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #a3b18a;"/>
+                                <VBox>
+                                    <Label text="Meeting Every Visitor's Expectations" style="-fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                                    <Label text="We strive to exceed the expectations of every guest." wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="03" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #a3b18a;"/>
+                                <VBox>
+                                    <Label text="Creating Unforgettable Experiences" style="-fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                                    <Label text="Making your stay memorable and pleasant." wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+
+                    <VBox prefWidth="400" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 30;" spacing="20">
+                        <Label text="&quot; Luxury must be comfortable, otherwise it is not luxury. Our goal is to provide the perfect balance. &quot;" 
+                               wrapText="true" style="-fx-font-style: italic; -fx-font-size: 18px; -fx-text-fill: #344e41;"/>
+                        <Label text="Our mission is to provide excellent service and high-quality accommodation that meets the diverse needs of our guests." 
+                               wrapText="true" style="-fx-text-fill: #666; -fx-font-size: 14px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- STEPS SECTION -->
+            <VBox alignment="CENTER" spacing="50" style="-fx-padding: 80 60;">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label text="HOW WE WORK" style="-fx-text-fill: #a3b18a; -fx-font-weight: bold; -fx-letter-spacing: 2;"/>
+                    <Label text="We Provide Easy Working Steps" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                </VBox>
+                <HBox spacing="50" alignment="CENTER">
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="01" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #a3b18a;"/>
+                        <Label text="Check In" style="-fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                        <Label text="Simply arrive and check&#10;in at your scheduled time." textAlignment="CENTER" style="-fx-text-fill: #666;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="02" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #a3b18a;"/>
+                        <Label text="Choose Place:" style="-fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                        <Label text="Select the apartment&#10;that fits your needs." textAlignment="CENTER" style="-fx-text-fill: #666;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="03" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #a3b18a;"/>
+                        <Label text="Pay for Place" style="-fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                        <Label text="Secure your booking&#10;with our easy payment." textAlignment="CENTER" style="-fx-text-fill: #666;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="15">
+                        <Label text="04" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #a3b18a;"/>
+                        <Label text="Transaction Proof" style="-fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                        <Label text="Receive your booking&#10;confirmation instantly." textAlignment="CENTER" style="-fx-text-fill: #666;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- FAQ SECTION -->
+            <VBox spacing="40" style="-fx-padding: 80 150;">
+                <VBox spacing="10">
+                    <Label text="FAQs" style="-fx-text-fill: #a3b18a; -fx-font-weight: bold;"/>
+                    <Label text="Frequently Asked Questions" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                </VBox>
+                <VBox spacing="15">
+                    <HBox alignment="CENTER_LEFT" style="-fx-border-color: #ddd; -fx-border-width: 0 0 1 0; -fx-padding: 15 0;">
+                        <Label text="How can I book a room?" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-font-size: 16px; -fx-text-fill: #344e41;"/>
+                        <Label text="+" style="-fx-font-size: 20px; -fx-text-fill: #344e41;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" style="-fx-border-color: #ddd; -fx-border-width: 0 0 1 0; -fx-padding: 15 0;">
+                        <Label text="What are the check-in times?" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-font-size: 16px; -fx-text-fill: #344e41;"/>
+                        <Label text="+" style="-fx-font-size: 20px; -fx-text-fill: #344e41;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" style="-fx-border-color: #ddd; -fx-border-width: 0 0 1 0; -fx-padding: 15 0;">
+                        <Label text="Is there a cancellation fee?" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-font-size: 16px; -fx-text-fill: #344e41;"/>
+                        <Label text="+" style="-fx-font-size: 20px; -fx-text-fill: #344e41;"/>
+                    </HBox>
+                </VBox>
+                <HBox alignment="CENTER" spacing="20" style="-fx-padding: 20 0;">
+                    <Label text="Have more questions?" style="-fx-text-fill: #344e41;"/>
+                    <Button text="Contact Us →" onAction="#goToAbout" style="-fx-background-color: #588157; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 10 25;"/>
+                </HBox>
+            </VBox>
+
+            <!-- FOOTER -->
+            <VBox style="-fx-background-color: #344e41; -fx-padding: 60;">
+                <HBox spacing="100">
+                    <VBox spacing="20" prefWidth="250">
+                        <Label text="BugHunters" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                        <HBox spacing="15">
+                            <Label text="f" style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+                            <Label text="i" style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+                            <Label text="t" style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+                        </HBox>
+                        <Label text="Bughunters@gmail.com" style="-fx-text-fill: #a3b18a;"/>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <VBox spacing="15">
+                        <Label text="LEARN MORE" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Label text="Success stories" style="-fx-text-fill: #a3b18a;"/>
+                        <Label text="Why Us?" style="-fx-text-fill: #a3b18a;"/>
+                        <Label text="How it works" style="-fx-text-fill: #a3b18a;"/>
+                        <Label text="FAQs" style="-fx-text-fill: #a3b18a;"/>
+                    </VBox>
+                    <VBox spacing="15">
+                        <Label text="RESOURCES" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Label text="Help center" style="-fx-text-fill: #a3b18a;"/>
+                        <Label text="Blog" style="-fx-text-fill: #a3b18a;"/>
+                        <Label text="Career" style="-fx-text-fill: #a3b18a;"/>
+                        <Label text="Press center" style="-fx-text-fill: #a3b18a;"/>
+                        <Label text="About Us" onMouseClicked="#goToAbout" style="-fx-text-fill: #a3b18a; -fx-cursor: hand;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+    </center>
+</BorderPane>

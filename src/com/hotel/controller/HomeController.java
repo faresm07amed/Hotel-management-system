@@ -73,4 +73,9 @@ public class HomeController {
     private void goToHome() {
         NavigationUtil.loadHome();
     }
+
+    @FXML
+    private void goToAbout() {
+        NavigationUtil.loadAbout();
+    }
 }

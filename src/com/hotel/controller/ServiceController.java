@@ -341,7 +341,12 @@ public class ServiceController {
     }
 
     @FXML
-    private void goToServices() {
+    public void goToServices() {
         NavigationUtil.loadServices();
+    }
+
+    @FXML
+    public void goToAbout() {
+        NavigationUtil.loadAbout();
     }
 }
