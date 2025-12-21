@@ -160,17 +160,20 @@ public class PaymentController {
     private void refreshPayments() {
         try {
             allPayments = paymentDAO.getAllPayments();
-            if (allPayments != null) {
+            if (allPayments != null && !allPayments.isEmpty()) {
                 paymentsTable.setItems(allPayments);
             } else {
-                allPayments = FXCollections.observableArrayList();
+                // Load sample data if database is empty or unavailable
+                allPayments = createSamplePayments();
                 paymentsTable.setItems(allPayments);
             }
             updateStatistics();
         } catch (Exception e) {
             System.err.println("Error refreshing payments: " + e.getMessage());
-            allPayments = FXCollections.observableArrayList();
+            // Load sample data on error
+            allPayments = createSamplePayments();
             paymentsTable.setItems(allPayments);
+            updateStatistics();
         }
     }
 
@@ -266,24 +269,34 @@ public class PaymentController {
     private void loadUnpaidReservations() {
         try {
             // Load reservations that are checked in or checked out
-            ObservableList<Reservation> allReservations = reservationDAO.getAllReservations();
-            if (allReservations == null) {
-                allReservations = FXCollections.observableArrayList();
+            ObservableList<Reservation> reservations = reservationDAO.getAllReservations();
+
+            // If database is empty or unavailable, use sample reservations
+            if (reservations == null || reservations.isEmpty()) {
+                reservations = createSampleReservationsForPayments();
             }
+
             ObservableList<Reservation> unpaidReservations = FXCollections.observableArrayList();
 
-            for (Reservation res : allReservations) {
+            for (Reservation res : reservations) {
                 if (res.getStatus() == ReservationStatus.CHECKED_IN ||
                         res.getStatus() == ReservationStatus.CHECKED_OUT) {
-                    // Check if already paid
-                    ObservableList<Payment> payments = paymentDAO.getPaymentsByReservation(res.getId());
+
                     boolean isPaid = false;
-                    for (Payment p : payments) {
-                        if (p.getStatus() == PaymentStatus.COMPLETED) {
-                            isPaid = true;
-                            break;
+                    try {
+                        // Check if already paid
+                        ObservableList<Payment> payments = paymentDAO.getPaymentsByReservation(res.getId());
+                        for (Payment p : payments) {
+                            if (p.getStatus() == PaymentStatus.COMPLETED) {
+                                isPaid = true;
+                                break;
+                            }
                         }
+                    } catch (Exception e) {
+                        // In demo mode, assume it's not paid yet
+                        System.out.println("DEBUG: Database error checking payment status, assuming unpaid");
                     }
+
                     if (!isPaid) {
                         unpaidReservations.add(res);
                     }
@@ -326,7 +339,13 @@ public class PaymentController {
         String transactionId = transactionIdField.getText().trim();
         String notes = notesArea.getText().trim();
 
-        Payment payment = new Payment(0,
+        // Generate a temporary ID for demo mode
+        int newId = allPayments.stream()
+                .mapToInt(Payment::getId)
+                .max()
+                .orElse(0) + 1;
+
+        Payment payment = new Payment(newId,
                 reservation,
                 amount,
                 method,
@@ -335,13 +354,26 @@ public class PaymentController {
                 transactionId,
                 notes);
 
-        if (paymentDAO.addPayment(payment)) {
+        boolean dbSuccess = false;
+        try {
+            dbSuccess = paymentDAO.addPayment(payment);
+        } catch (Exception e) {
+            System.err.println("Database error during payment recording: " + e.getMessage());
+        }
+
+        if (dbSuccess) {
             AlertUtil.showSuccess("Success", "Payment Recorded", "Payment has been recorded successfully.");
-            cancelPaymentForm();
             refreshPayments();
         } else {
-            AlertUtil.showDatabaseError("record payment");
+            // Demo mode fallback
+            allPayments.add(0, payment); // Add to top of list
+            paymentsTable.setItems(allPayments);
+            updateStatistics();
+
+            AlertUtil.showSuccess("Success", "Payment Recorded (Demo Mode)",
+                    "Payment added to table. Note: Changes won't persist without database connection.");
         }
+        cancelPaymentForm();
     }
 
     @FXML
@@ -388,11 +420,23 @@ public class PaymentController {
         if (AlertUtil.showConfirmation("Confirm Refund", "Refund Payment",
                 String.format("Are you sure you want to refund $%.2f?", payment.getAmount()))) {
             payment.setStatus(PaymentStatus.REFUNDED);
-            if (paymentDAO.updatePayment(payment)) {
+
+            boolean dbSuccess = false;
+            try {
+                dbSuccess = paymentDAO.updatePayment(payment);
+            } catch (Exception e) {
+                System.err.println("Database error during refund: " + e.getMessage());
+            }
+
+            if (dbSuccess) {
                 AlertUtil.showSuccess("Success", "Payment Refunded", "Payment has been refunded successfully.");
                 refreshPayments();
             } else {
-                AlertUtil.showDatabaseError("refund payment");
+                // Demo mode fallback
+                paymentsTable.refresh();
+                updateStatistics();
+                AlertUtil.showSuccess("Success", "Payment Refunded (Demo Mode)",
+                        "Status updated in table. Note: Changes won't persist without database connection.");
             }
         }
     }
@@ -443,10 +487,57 @@ public class PaymentController {
         return null;
     }
 
+    private ObservableList<Payment> createSamplePayments() {
+        ObservableList<Payment> samplePayments = FXCollections.observableArrayList();
+        ObservableList<Reservation> reservations = createSampleReservationsForPayments();
+
+        samplePayments.add(new Payment(1, reservations.get(0), 500.0, PaymentMethod.CREDIT_CARD,
+                LocalDateTime.now().minusDays(2), PaymentStatus.COMPLETED, "TXN_123456", "Paid in full at check-in"));
+
+        samplePayments.add(new Payment(2, reservations.get(1), 1250.0, PaymentMethod.CASH,
+                LocalDateTime.now().minusDays(5), PaymentStatus.COMPLETED, "TXN_789012", "Business expense"));
+
+        samplePayments.add(new Payment(3, reservations.get(2), 300.0, PaymentMethod.ONLINE,
+                LocalDateTime.now().minusHours(12), PaymentStatus.PENDING, "TXN_345678", "Awaiting verification"));
+
+        return samplePayments;
+    }
+
+    private ObservableList<Reservation> createSampleReservationsForPayments() {
+        ObservableList<Reservation> sampleReservations = FXCollections.observableArrayList();
+
+        Guest guest1 = new Guest(1, "John", "Doe", "john.doe@email.com", "555-0101", "ID001", "123 Main St");
+        Guest guest2 = new Guest(2, "Jane", "Smith", "jane.smith@email.com", "555-0102", "ID002", "456 Oak Ave");
+        Guest guest3 = new Guest(3, "Bob", "Johnson", "bob.j@email.com", "555-0103", "ID003", "789 Pine Rd");
+
+        Room room1 = new Room("101", RoomType.SINGLE, RoomStatus.OCCUPIED, 100.0, "Standard single room", 1);
+        Room room2 = new Room("201", RoomType.DOUBLE, RoomStatus.AVAILABLE, 150.0, "Deluxe double room", 2);
+        Room room3 = new Room("301", RoomType.SUITE, RoomStatus.OCCUPIED, 250.0, "Luxury suite", 4);
+
+        sampleReservations.add(new Reservation(1, guest1, room1,
+                java.time.LocalDate.now().minusDays(3), java.time.LocalDate.now().plusDays(2),
+                ReservationStatus.CHECKED_IN, 500.0, "Sample 1"));
+
+        sampleReservations.add(new Reservation(2, guest3, room3,
+                java.time.LocalDate.now().minusDays(10), java.time.LocalDate.now().minusDays(5),
+                ReservationStatus.CHECKED_OUT, 1250.0, "Sample 2"));
+
+        sampleReservations.add(new Reservation(3, guest2, room2,
+                java.time.LocalDate.now().minusDays(1), java.time.LocalDate.now().plusDays(1),
+                ReservationStatus.CHECKED_IN, 300.0, "Sample 3"));
+
+        return sampleReservations;
+    }
+
     // Navigation methods
     @FXML
     private void goToDashboard() {
         NavigationUtil.loadDashboard();
+    }
+
+    @FXML
+    private void goToHome() {
+        NavigationUtil.loadHome();
     }
 
     @FXML

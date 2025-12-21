@@ -4,7 +4,6 @@ REM Hotel Management System - Run Script
 set JAVAFX_LIB=javafx-sdk-17.0.2\lib
 set MYSQL_JAR=mysql-connector-j-8.0.33.jar
 set MODULE_PATH=%JAVAFX_LIB%;%MYSQL_JAR%
-/
 echo === Hotel Management System ===
 echo.
 
@@ -22,8 +21,11 @@ if %ERRORLEVEL% EQU 0 (
     REM Copy FXML and resources
     echo [3/3] Copying resources...
     if not exist bin\com\hotel\view mkdir bin\com\hotel\view
+    if not exist bin\com\hotel\view\images mkdir bin\com\hotel\view\images
     copy src\com\hotel\view\*.fxml bin\com\hotel\view\ >nul 2>&1
     copy src\com\hotel\view\styles.css bin\com\hotel\view\ >nul 2>&1
+    copy src\com\hotel\view\images\*.* bin\com\hotel\view\images\ >nul 2>&1
+    copy src\com\hotel\view\*.png bin\com\hotel\view\ >nul 2>&1
     
     echo.
     echo Starting application...

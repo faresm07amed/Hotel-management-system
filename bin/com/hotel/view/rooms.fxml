@@ -4,7 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.hotel.controller.RoomController"
             style="-fx-background-image: url('dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
@@ -22,6 +21,8 @@
                     <Insets top="20"/>
                 </padding>
                 <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🏠 Home" onAction="#goToHome" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
@@ -116,28 +117,28 @@
                 <VBox fx:id="roomFormPanel" spacing="20" managed="false" visible="false" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
                     <Label text="Room Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
                     
-                    <GridPane hgap="20" vgap="15">
+                    <GridPane hgap="25" vgap="18">
                         <columnConstraints>
-                            <ColumnConstraints minWidth="120" prefWidth="120"/>
-                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints minWidth="150" prefWidth="180" />
+                            <ColumnConstraints hgrow="ALWAYS" />
                         </columnConstraints>
                         
-                        <Label text="Room Number:"/>
-                        <TextField fx:id="roomNumberField" promptText="e.g., 101, 202" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <Label text="Room Number:" styleClass="form-label"/>
+                        <TextField fx:id="roomNumberField" promptText="e.g., 101, 202" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                         
-                        <Label text="Room Type:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <ComboBox fx:id="typeComboBox" promptText="Select room type" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Room Type:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="typeComboBox" promptText="Select room type" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                         
-                        <Label text="Max Occupancy:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="Max Occupancy:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                         <TextField fx:id="maxOccupancyField" promptText="Maximum number of guests" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                         
-                        <Label text="Price/Night ($):" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label text="Price/Night ($):" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                         <TextField fx:id="pricePerNightField" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                         
-                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                        <ComboBox fx:id="statusComboBox" promptText="Select room status" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <Label text="Status:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="statusComboBox" promptText="Select room status" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                         
-                        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <Label text="Description:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                         <TextArea fx:id="descriptionArea" promptText="Room features and amenities" wrapText="true" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
                     </GridPane>
                     

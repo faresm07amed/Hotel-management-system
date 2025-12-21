@@ -48,6 +48,10 @@ public class NavigationUtil {
         loadView("/com/hotel/view/dashboard.fxml");
     }
 
+    public static void loadHome() {
+        loadView("/com/hotel/view/home.fxml");
+    }
+
     public static void loadGuests() {
         loadView("/com/hotel/view/guests.fxml");
     }

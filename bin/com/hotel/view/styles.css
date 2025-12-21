@@ -146,7 +146,7 @@
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-cursor: hand;
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-font-weight: 500;
 }
 
@@ -241,7 +241,7 @@
 .form-panel {
     -fx-background-color: rgba(72, 133, 103, 0.95);
     -fx-background-radius: 12px;
-    -fx-padding: 24px;
+    -fx-padding: 40px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
 }
 
@@ -260,8 +260,8 @@
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
-    -fx-padding: 10px 12px;
-    -fx-font-size: 14px;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 15px;
 }
 
 .text-field:focused,
@@ -276,6 +276,7 @@
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
+    -fx-padding: 12px;
 }
 
 .combo-box:focused {
@@ -288,8 +289,8 @@
 }
 
 .form-label {
-    -fx-text-fill: #64748b;
-    -fx-font-size: 13px;
+    -fx-text-fill: #334155;
+    -fx-font-size: 15px;
     -fx-font-weight: 600;
 }
 
@@ -366,4 +367,43 @@
     -fx-background-color: #e2e8f0;
     -fx-min-height: 1px;
     -fx-max-height: 1px;
+}
+
+/* ===== HOME PAGE SPECIAL STYLES ===== */
+.home-section-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #344e41;
+}
+
+.home-section-subtitle {
+    -fx-text-fill: #588157;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.faq-question {
+    -fx-font-weight: bold;
+    -fx-text-fill: #344e41;
+}
+
+.faq-answer {
+    -fx-text-fill: #666;
+    -fx-font-size: 14px;
+}
+
+.booking-bar {
+    -fx-background-color: rgba(72, 133, 103, 0.95);
+    -fx-background-radius: 12px;
+}
+
+.booking-label {
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-font-size: 12px;
+}
+
+.booking-value {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
 }

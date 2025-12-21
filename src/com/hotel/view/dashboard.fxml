@@ -11,20 +11,19 @@
     <!-- Left Sidebar Navigation -->
     <left>
         <VBox style="-fx-background-color: #236023; -fx-min-width: 250px; -fx-max-width: 250px;">
-            <!-- Sidebar Header -->
             <VBox style="-fx-background-color: #344E41D4; -fx-padding: 20;">
                 <Label text="Hotel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
                 <Label text="Management" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
             </VBox>
             
-            <!-- Navigation Menu -->
             <VBox spacing="2">
                 <padding>
                     <Insets top="20"/>
                 </padding>
-                
                 <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
                         style="-fx-background-color: #FFEDD8; -fx-text-fill: #588157; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT; -fx-font-weight: bold;"/>
+                <Button text="🏠 Home" onAction="#goToHome" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="🏠 Rooms" onAction="#goToRooms" maxWidth="Infinity"

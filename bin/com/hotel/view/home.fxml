@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controller.HomeController" stylesheets="@styles.css">
+    <center>
+    <ScrollPane fitToWidth="true" style="-fx-background-color: #F8F5F0;" hbarPolicy="NEVER">
+        <VBox style="-fx-background-color: #F8F5F0;">
+            
+            <!-- HEADER / NAVBAR -->
+            <HBox alignment="CENTER_LEFT" styleClass="home-navbar">
+                <Label text="BugHunters" style="-fx-text-fill: #588157; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="10" alignment="CENTER">
+                    <Label text="Home" styleClass="nav-link"/>
+                    <Label text="About Us" styleClass="nav-link"/>
+                    <Label text="Our Services" styleClass="nav-link"/>
+                    <Label text="FAQ" styleClass="nav-link"/>
+                    <Label text="Contact" styleClass="nav-link"/>
+                    <Button text="Dashboard" onAction="#goToDashboard" styleClass="nav-button-header"/>
+                </HBox>
+            </HBox>
+
+            <!-- HERO SECTION -->
+            <StackPane prefHeight="400">
+                <ImageView fitWidth="1200" preserveRatio="true" smooth="true">
+                    <image>
+                        <Image url="@images/home_hero.png"/>
+                    </image>
+                </ImageView>
+                
+                <!-- Dark Overlay -->
+                <VBox style="-fx-background-color: rgba(0,0,0,0.4);" alignment="CENTER" spacing="25">
+                    <Label text="Luxury Stay and Affordability" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-letter-spacing: 2px;"/>
+                    <Label text="Welcome To The Place Where&#10;BugHunters Meets Affordability" textAlignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 42px; -fx-font-weight: bold;"/>
+                    <Button text="Book Now" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 4px; -fx-text-fill: white; -fx-padding: 12 40; -fx-font-size: 16px;"/>
+                </VBox>
+                
+                <!-- Booking Bar (Floats at bottom) -->
+                <VBox StackPane.alignment="BOTTOM_CENTER">
+                    <HBox alignment="CENTER" spacing="50" styleClass="booking-bar" style="-fx-padding: 25 40;" maxWidth="900" translateY="45">
+                        <VBox spacing="8">
+                            <Label text="Check In" styleClass="booking-label"/>
+                            <Label text="14 April" styleClass="booking-value"/>
+                        </VBox>
+                        <Separator orientation="VERTICAL" style="-fx-opacity: 0.2;"/>
+                        <VBox spacing="8">
+                            <Label text="Check Out" styleClass="booking-label"/>
+                            <Label text="15 April" styleClass="booking-value"/>
+                        </VBox>
+                        <Separator orientation="VERTICAL" style="-fx-opacity: 0.2;"/>
+                        <VBox spacing="8">
+                            <Label text="Guests" styleClass="booking-label"/>
+                            <Label text="03" styleClass="booking-value"/>
+                        </VBox>
+                        <Button text="Check Availability" onAction="#goToReservations" style="-fx-background-color: #588157; -fx-text-fill: white; -fx-padding: 15 35; -fx-background-radius: 8; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </StackPane>
+
+            <!-- ABOUT US SECTION -->
+            <HBox spacing="60" style="-fx-padding: 80 60;">
+                <StackPane alignment="CENTER_LEFT" prefWidth="600">
+                    <ImageView fitWidth="300" preserveRatio="true" smooth="true" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 20, 0, 0, 10);">
+                        <image>
+                            <Image url="@images/about_1.png"/>
+                        </image>
+                    </ImageView>
+                    <ImageView fitWidth="200" preserveRatio="true" smooth="true" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 25, 0, 0, 15);" translateX="180" translateY="80">
+                        <image>
+                            <Image url="@images/about_2.png"/>
+                        </image>
+                    </ImageView>
+                </StackPane>
+                
+                <VBox spacing="30" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <Label text="About Us" styleClass="home-section-subtitle"/>
+                        <Region style="-fx-background-color: #588157; -fx-min-height: 2; -fx-min-width: 50;" translateY="2"/>
+                    </HBox>
+                    <Label text="At BugHunters Hotels" styleClass="home-section-title"/>
+                    <Label text="Experience luxury like never before. Our hotels combine modern technology with classic hospitality to ensure every stay is perfect. Located in the heart of nature, we provide a peaceful escape from the digital world, even for the most active bug hunters." 
+                           wrapText="true" style="-fx-text-fill: #555; -fx-font-size: 18px; -fx-line-spacing: 6;"/>
+                    <Button text="The Rooms" onAction="#goToRooms" style="-fx-background-color: #588157; -fx-text-fill: white; -fx-padding: 15 35; -fx-background-radius: 4;"/>
+                </VBox>
+            </HBox>
+
+            <!-- OUR ROOMS GRID -->
+            <VBox spacing="40" style="-fx-padding: 60 60 80 60;">
+                <VBox spacing="15">
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <Label text="Our Rooms" styleClass="home-section-subtitle"/>
+                        <Region style="-fx-background-color: #588157; -fx-min-height: 2; -fx-min-width: 50;" translateY="2"/>
+                    </HBox>
+                    <Label text="The best room, just for you" styleClass="home-section-title"/>
+                </VBox>
+                
+                <GridPane hgap="30" vgap="30">
+                    <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2">
+                         <ImageView fitWidth="450" fitHeight="380" preserveRatio="false" styleClass="gallery-thumbnail">
+                            <image><Image url="@images/room_1.png"/></image>
+                        </ImageView>
+                        <VBox StackPane.alignment="BOTTOM_LEFT" style="-fx-padding: 30;">
+                            <Label style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #344e41; -fx-padding: 8 15; -fx-background-radius: 5; -fx-font-weight: bold;">$250 / night</Label>
+                        </VBox>
+                    </StackPane>
+                    
+                    <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+                         <ImageView fitWidth="380" fitHeight="180" preserveRatio="false" styleClass="gallery-thumbnail">
+                            <image><Image url="@images/room_2.png"/></image>
+                        </ImageView>
+                        <VBox StackPane.alignment="TOP_RIGHT" style="-fx-padding: 20;">
+                            <Label style="-fx-background-color: rgba(52, 78, 65, 0.9); -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 5;">$150 / night</Label>
+                        </VBox>
+                    </StackPane>
+                    
+                    <HBox spacing="30" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <StackPane>
+                            <ImageView fitWidth="180" fitHeight="180" preserveRatio="false" styleClass="gallery-thumbnail">
+                                <image><Image url="@images/room_3.png"/></image>
+                            </ImageView>
+                            <VBox StackPane.alignment="TOP_RIGHT" style="-fx-padding: 15;">
+                                <Label style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #344e41; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-size: 11px;">$250 / night</Label>
+                            </VBox>
+                        </StackPane>
+                        <StackPane>
+                            <ImageView fitWidth="180" fitHeight="180" preserveRatio="false" styleClass="gallery-thumbnail">
+                                <image><Image url="@images/dining.png"/></image>
+                            </ImageView>
+                            <VBox StackPane.alignment="TOP_RIGHT" style="-fx-padding: 15;">
+                                <Label style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #344e41; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-size: 11px;">$250 / night</Label>
+                            </VBox>
+                        </StackPane>
+                    </HBox>
+                </GridPane>
+            </VBox>
+
+            <!-- LUXE ROOM SECTION -->
+            <HBox spacing="60" style="-fx-padding: 80 60; -fx-background-color: white;">
+                <ImageView fitWidth="450" fitHeight="380" preserveRatio="false" styleClass="gallery-thumbnail">
+                    <image><Image url="@images/room_1.png"/></image>
+                </ImageView>
+                
+                <VBox spacing="30" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <Label text="Luxury Room" styleClass="home-section-subtitle"/>
+                        <Region style="-fx-background-color: #588157; -fx-min-height: 2; -fx-min-width: 50;" translateY="2"/>
+                    </HBox>
+                    <Label text="Roomury Luxe Room" styleClass="home-section-title"/>
+                    <Label text="Experience the ultimate in comfort and style in our Luxury Room. Designed for those who appreciate the finer things, this room offers panoramic views and premium amenities." 
+                           wrapText="true" style="-fx-text-fill: #555; -fx-font-size: 18px;"/>
+                    
+                    <HBox spacing="50">
+                        <VBox spacing="10">
+                            <Label text="25%" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                            <Label text="Discount on first&#10;booking" wrapText="true" style="-fx-text-fill: #666;"/>
+                        </VBox>
+                        <VBox spacing="10">
+                            <Label text="10%" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #344e41;"/>
+                            <Label text="Cashback for members" wrapText="true" style="-fx-text-fill: #666;"/>
+                        </VBox>
+                    </HBox>
+                    
+                    <Button text="The Rooms" onAction="#goToRooms" style="-fx-background-color: #588157; -fx-text-fill: white; -fx-padding: 15 40; -fx-background-radius: 4;"/>
+                </VBox>
+            </HBox>
+
+            <!-- GALLERY SECTION -->
+            <VBox spacing="40" style="-fx-padding: 80 60;">
+                <VBox spacing="15" alignment="CENTER">
+                    <HBox spacing="12" alignment="CENTER">
+                        <Region style="-fx-background-color: #588157; -fx-min-height: 2; -fx-min-width: 50;" translateY="2"/>
+                        <Label text="Gallery" styleClass="home-section-subtitle"/>
+                        <Region style="-fx-background-color: #588157; -fx-min-height: 2; -fx-min-width: 50;" translateY="2"/>
+                    </HBox>
+                    <Label text="Check Our Hotel Gallery" styleClass="home-section-title"/>
+                </VBox>
+                
+                <HBox spacing="30" alignment="CENTER">
+                    <ImageView fitWidth="320" fitHeight="400" preserveRatio="false" styleClass="gallery-thumbnail">
+                        <image><Image url="@images/dining.png"/></image>
+                    </ImageView>
+                    <ImageView fitWidth="320" fitHeight="400" preserveRatio="false" styleClass="gallery-thumbnail">
+                        <image><Image url="@images/about_1.png"/></image>
+                    </ImageView>
+                    <ImageView fitWidth="320" fitHeight="400" preserveRatio="false" styleClass="gallery-thumbnail">
+                        <image><Image url="@images/about_2.png"/></image>
+                    </ImageView>
+                </HBox>
+            </VBox>
+
+            <!-- FAQ SECTION -->
+            <VBox spacing="40" style="-fx-padding: 80 60; -fx-background-color: #F8F5F0;">
+                <VBox spacing="15">
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <Label text="FAQ" styleClass="home-section-subtitle"/>
+                        <Region style="-fx-background-color: #588157; -fx-min-height: 2; -fx-min-width: 50;" translateY="2"/>
+                    </HBox>
+                    <Label text="Frequently Asked Questions" styleClass="home-section-title"/>
+                </VBox>
+                
+                <VBox spacing="20">
+                    <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                         <HBox alignment="CENTER_LEFT" onMouseClicked="#toggleFaq1" style="-fx-cursor: hand;">
+                            <Label text="How can I book a room at BugHunters Hotels?" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="faq-question" style="-fx-font-size: 18px;"/>
+                            <Label fx:id="faqIcon1" text="+" style="-fx-font-size: 24px; -fx-text-fill: #588157;"/>
+                        </HBox>
+                        <VBox fx:id="faq1" visible="false" managed="false" style="-fx-padding: 20 0 0 0;">
+                            <Label text="You can book directly through this application by navigating to the Reservations page or by calling our 24/7 concierge service." wrapText="true" styleClass="faq-answer"/>
+                        </VBox>
+                    </VBox>
+                    
+                    <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                         <HBox alignment="CENTER_LEFT" onMouseClicked="#toggleFaq2" style="-fx-cursor: hand;">
+                            <Label text="What kind of tech amenities do you provide?" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="faq-question" style="-fx-font-size: 18px;"/>
+                            <Label fx:id="faqIcon2" text="+" style="-fx-font-size: 24px; -fx-text-fill: #588157;"/>
+                        </HBox>
+                        <VBox fx:id="faq2" visible="false" managed="false" style="-fx-padding: 20 0 0 0;">
+                            <Label text="All rooms are equipped with high-speed fiber internet, multiple monitors for workstations, and ergonomic chairs for the best dev experience." wrapText="true" styleClass="faq-answer"/>
+                        </VBox>
+                    </VBox>
+
+                    <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                         <HBox alignment="CENTER_LEFT" onMouseClicked="#toggleFaq3" style="-fx-cursor: hand;">
+                            <Label text="Can I access the management dashboard from home?" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="faq-question" style="-fx-font-size: 18px;"/>
+                            <Label fx:id="faqIcon3" text="+" style="-fx-font-size: 24px; -fx-text-fill: #588157;"/>
+                        </HBox>
+                        <VBox fx:id="faq3" visible="false" managed="false" style="-fx-padding: 20 0 0 0;">
+                            <Label text="Yes, you can access the dashboard by clicking the 'Dashboard' button in the top navigation bar once you are logged in as staff." wrapText="true" styleClass="faq-answer"/>
+                        </VBox>
+                    </VBox>
+
+                </VBox>
+            </VBox>
+
+            <!-- FOOTER -->
+            <VBox style="-fx-background-color: #344e41; -fx-padding: 60 60 30 60;">
+                <HBox spacing="150">
+                    <VBox spacing="30" prefWidth="350">
+                        <Label text="BugHunters" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"/>
+                        <Label text="Nature meets affordability. The perfect stay for digital nomads and developers alike. Experience tranquility without sacrificing connectivity." wrapText="true" style="-fx-text-fill: #a3b18a; -fx-font-size: 16px;"/>
+                        <HBox spacing="20">
+                            <!-- Social icons placeholders -->
+                            <Label text="FB" style="-fx-text-fill: white;"/>
+                            <Label text="IG" style="-fx-text-fill: white;"/>
+                            <Label text="TW" style="-fx-text-fill: white;"/>
+                        </HBox>
+                    </VBox>
+                    <HBox spacing="100" HBox.hgrow="ALWAYS">
+                        <VBox spacing="20">
+                            <Label text="Quick Links" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px;"/>
+                            <Hyperlink text="Dashboard" onAction="#goToDashboard" style="-fx-text-fill: #a3b18a; -fx-underline: false; -fx-padding: 0;"/>
+                            <Hyperlink text="Rooms" onAction="#goToRooms" style="-fx-text-fill: #a3b18a; -fx-underline: false; -fx-padding: 0;"/>
+                            <Hyperlink text="Reservations" onAction="#goToReservations" style="-fx-text-fill: #a3b18a; -fx-underline: false; -fx-padding: 0;"/>
+                        </VBox>
+                        <VBox spacing="20">
+                            <Label text="Contact Us" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px;"/>
+                            <Label text="contact@bughunters.com" style="-fx-text-fill: #a3b18a;"/>
+                            <Label text="+1 234 567 890" style="-fx-text-fill: #a3b18a;"/>
+                        </VBox>
+                    </HBox>
+                </HBox>
+                <Region prefHeight="80"/>
+                <Separator style="-fx-opacity: 0.1;"/>
+                <Label text="© 2024 BugHunters Hotels. All rights reserved." alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #588157; -fx-padding: 30 0 0 0;"/>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+    </center>
+</BorderPane>

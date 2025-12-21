@@ -4,7 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.hotel.controller.ReservationController"
             style="-fx-background-image: url('dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
@@ -22,6 +21,8 @@
                     <Insets top="20"/>
                 </padding>
                 <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🏠 Home" onAction="#goToHome" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
                 <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
@@ -90,32 +91,32 @@
                     
                     <GridPane hgap="25" vgap="18">
                         <columnConstraints>
-                            <ColumnConstraints minWidth="120" prefWidth="140"/>
-                            <ColumnConstraints hgrow="ALWAYS" minWidth="300"/>
+                            <ColumnConstraints minWidth="150" prefWidth="180"/>
+                            <ColumnConstraints hgrow="ALWAYS" />
                         </columnConstraints>
                         
-                        <Label text="Guest:"/>
+                        <Label text="Guest:" styleClass="form-label"/>
                         <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                            <ComboBox fx:id="guestComboBox" promptText="Select guest" prefWidth="350" HBox.hgrow="ALWAYS"/>
-                            <Button text="New Guest" onAction="#goToGuests" style="-fx-background-color: transparent; -fx-text-fill: #3b82f6; -fx-border-color: #3b82f6; -fx-border-radius: 4px;"/>
+                            <ComboBox fx:id="guestComboBox" promptText="Select guest" />
+                            <Button text="New Guest" minWidth="100" onAction="#goToGuests" style="-fx-background-color: transparent; -fx-text-fill: #3b82f6; -fx-border-color: #3b82f6; -fx-border-radius: 4px;"/>
                         </HBox>
                         
-                        <Label text="Room:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <Label text="Room:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                         <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <ComboBox fx:id="roomComboBox" promptText="Select available room" prefWidth="350" onAction="#calculateTotal" HBox.hgrow="ALWAYS"/>
-                            <Label fx:id="roomPriceLabel" text="0.00/night" style="-fx-font-weight: bold;"/>
+                            <ComboBox fx:id="roomComboBox" promptText="Select available room" onAction="#calculateTotal" />
+                            <Label fx:id="roomPriceLabel" text="0.00/night" minWidth="100" style="-fx-font-weight: bold;"/>
                         </HBox>
                         
-                        <Label text="Check-In Date:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                        <DatePicker fx:id="checkInDatePicker" prefWidth="Infinity" onAction="#calculateTotal" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label text="Check-In Date:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <DatePicker fx:id="checkInDatePicker" onAction="#calculateTotal" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                         
-                        <Label text="Check-Out Date:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                        <DatePicker fx:id="checkOutDatePicker" prefWidth="Infinity" onAction="#calculateTotal" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label text="Check-Out Date:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <DatePicker fx:id="checkOutDatePicker" onAction="#calculateTotal" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                         
-                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                        <ComboBox fx:id="statusComboBox" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-
-                        <Label text="Total Price:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <Label text="Status:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="statusComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+ 
+                        <Label text="Total Price:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                         <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
                             <Label fx:id="totalPriceLabel" text="0.00" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #27ae60;"/>
                             <Label text="(" style="-fx-text-fill: #64748b;"/>
@@ -123,7 +124,7 @@
                             <Label text=" nights)" style="-fx-text-fill: #64748b;"/>
                         </HBox>
                         
-                        <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                        <Label text="Notes:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
                         <TextArea fx:id="notesArea" prefHeight="100" promptText="Additional notes..." GridPane.columnIndex="1" GridPane.rowIndex="6"/>
                     </GridPane>
                     

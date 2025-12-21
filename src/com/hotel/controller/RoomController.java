@@ -401,6 +401,11 @@ public class RoomController {
     }
 
     @FXML
+    private void goToHome() {
+        NavigationUtil.loadHome();
+    }
+
+    @FXML
     private void goToGuests() {
         NavigationUtil.loadGuests();
     }
