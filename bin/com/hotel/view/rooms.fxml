@@ -56,8 +56,7 @@
                     <Region HBox.hgrow="ALWAYS"/>
                     <ComboBox fx:id="typeFilter" promptText="Room Type" prefWidth="150" onAction="#applyFilters"/>
                     <ComboBox fx:id="statusFilter" promptText="Status" prefWidth="150" onAction="#applyFilters"/>
-                    <Button text="+ Add Room" onAction="#showAddRoomForm" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-font-weight: bold;"/>
-                    <Button text="🔄 Refresh" onAction="#refreshRooms" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
+                    
                 </HBox>
 
                 <!-- Statistics Cards -->
@@ -84,6 +83,11 @@
                           style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-border-color: #f39c12; -fx-border-width: 0 0 0 4;">
                         <Label text="Maintenance" style="-fx-text-fill: #64748b; -fx-font-size: 13px;"/>
                         <Label fx:id="maintenanceRoomsLabel" text="0" style="-fx-text-fill: #f39c12; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    </VBox>
+                    
+                    <VBox spacing="10" GridPane.columnIndex="8" GridPane.rowIndex="0" HBox.hgrow="ALWAYS">  
+                        <Button text="+ Add Room" onAction="#showAddRoomForm" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-font-weight: bold;"/>
+                        <Button text="🔄 Refresh" onAction="#refreshRooms" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
                     </VBox>
                 </GridPane>
 
@@ -119,7 +123,7 @@
                         </columnConstraints>
                         
                         <Label text="Room Number:"/>
-                        <TextField fx:id="roomNumberField" promptText="e.g., 101, 202" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <TextField fx:id="roomNumberField" promptText="e.g., 101, 202" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
                         
                         <Label text="Room Type:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                         <ComboBox fx:id="typeComboBox" promptText="Select room type" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
