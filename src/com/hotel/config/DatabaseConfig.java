@@ -1,9 +1,9 @@
 package com.hotel.config;
 
 public class DatabaseConfig {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/hotel_management";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/?user=root";
     private static final String DB_USER = "root"; // Change to your MySQL username
-    private static final String DB_PASSWORD = ""; // Change to your MySQL password
+    private static final String DB_PASSWORD = "1234"; // Change to your MySQL password
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     public static String getDbUrl() {
