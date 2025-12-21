@@ -21,27 +21,15 @@ public class NavigationUtil {
             Parent root = loader.load();
             System.out.println("FXML loaded successfully");
 
-            Scene scene = new Scene(root);
+            if (primaryStage.getScene() == null) {
+                // First time loading: create scene with default dimensions
+                Scene scene = new Scene(root, 1200, 800);
+                primaryStage.setScene(scene);
+            } else {
+                // Subsequent navigation: update root to maintain current window size
+                primaryStage.getScene().setRoot(root);
+            }
 
-            // DISABLED: CSS loading causes StackOverflowError due to circular references
-            // Try to load CSS, but don't fail if it's not found
-            /*
-             * try {
-             * String cssPath = "/com/hotel/view/styles.css";
-             * java.net.URL cssUrl = NavigationUtil.class.getResource(cssPath);
-             * if (cssUrl != null) {
-             * scene.getStylesheets().add(cssUrl.toExternalForm());
-             * System.out.println("CSS loaded successfully");
-             * } else {
-             * System.err.println("WARNING: CSS file not found at: " + cssPath);
-             * }
-             * } catch (Exception cssEx) {
-             * System.err.println("WARNING: Failed to load CSS: " + cssEx.getMessage());
-             * // Continue without CSS
-             * }
-             */
-
-            primaryStage.setScene(scene);
             primaryStage.show();
             System.out.println("View displayed successfully");
         } catch (IOException e) {
