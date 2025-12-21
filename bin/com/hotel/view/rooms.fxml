@@ -6,90 +6,90 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.hotel.controller.RoomController">
+            fx:controller="com.hotel.controller.RoomController"
+            style="-fx-background-image: url('dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
     
-    <!-- Top Navigation Bar -->
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-panel" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets bottom="15" left="20" right="20" top="15"/>
-            </padding>
-            <Label text="Hotel Management System" styleClass="header-label" textFill="white"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Dashboard" styleClass="nav-button" onAction="#goToDashboard"/>
-            <Button text="Guests" styleClass="nav-button" onAction="#goToGuests"/>
-            <Button text="Rooms" styleClass="nav-button" onAction="#goToRooms"/>
-            <Button text="Reservations" styleClass="nav-button" onAction="#goToReservations"/>
-            <Button text="Payments" styleClass="nav-button" onAction="#goToPayments"/>
-            <Button text="Services" styleClass="nav-button" onAction="#goToServices"/>
-        </HBox>
-    </top>
+    <!-- Left Sidebar Navigation -->
+    <left>
+        <VBox style="-fx-background-color: #236023; -fx-min-width: 250px; -fx-max-width: 250px;">
+            <VBox style="-fx-background-color: #344E41D4; -fx-padding: 20;">
+                <Label text="Hotel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="Management" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            </VBox>
+            
+            <VBox spacing="2">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🏠 Rooms" onAction="#goToRooms" maxWidth="Infinity"
+                        style="-fx-background-color: #FFEDD8; -fx-text-fill: #588157; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT; -fx-font-weight: bold;"/>
+                <Button text="📅 Reservations" onAction="#goToReservations" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="💰 Payments" onAction="#goToPayments" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🛎️ Services" onAction="#goToServices" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+            </VBox>
+        </VBox>
+    </left>
 
     <!-- Main Content -->
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
-            <VBox spacing="25" styleClass="content-panel">
-                <padding>
-                    <Insets bottom="30" left="30" right="30" top="30"/>
-                </padding>
-
+        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #F3EDDF; -fx-background: #F3EDDF;">
+            <VBox spacing="25" style="-fx-padding: 30;">
+                
                 <!-- Header Section -->
-                <VBox spacing="10">
-                    <Label text="Room Management" styleClass="header-label"/>
-                    <Label text="Manage hotel rooms inventory and availability" styleClass="sub-header-label"/>
+                <VBox spacing="8">
+                    <Label text="Room Management" style="-fx-text-fill: #0f172a; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label text="Manage hotel rooms inventory and availability" style="-fx-text-fill: #64748b; -fx-font-size: 14px; "/>
                 </VBox>
 
                 <!-- Search and Filter Section -->
                 <HBox spacing="15" alignment="CENTER_LEFT">
-                    <TextField fx:id="searchField" promptText="Search by room number..." prefWidth="300" onKeyReleased="#searchRooms"/>
-                    <Button text="Search" styleClass="button" onAction="#searchRooms"/>
-                    <Button text="Clear" styleClass="button" onAction="#clearSearch"/>
+                    <TextField fx:id="searchField" promptText="Search by room number..." prefWidth="300" onKeyReleased="#searchRooms" style="-fx-background-color: white; -fx-background-radius: 8px;"/>
+                    <Button text="Search" onAction="#searchRooms" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px;"/>
+                    <Button text="Clear" onAction="#clearSearch" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Label text="Filter by:" styleClass="form-label"/>
                     <ComboBox fx:id="typeFilter" promptText="Room Type" prefWidth="150" onAction="#applyFilters"/>
                     <ComboBox fx:id="statusFilter" promptText="Status" prefWidth="150" onAction="#applyFilters"/>
-                    <Button text="Add Room" styleClass="primary-button" onAction="#showAddRoomForm"/>
-                    <Button text="Refresh" styleClass="button" onAction="#refreshRooms"/>
+                    <Button text="+ Add Room" onAction="#showAddRoomForm" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-font-weight: bold;"/>
+                    <Button text="🔄 Refresh" onAction="#refreshRooms" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
                 </HBox>
 
                 <!-- Statistics Cards -->
                 <GridPane hgap="20" vgap="15">
-                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets bottom="15" left="15" right="15" top="15"/>
-                        </padding>
-                        <Label text="Total Rooms" styleClass="stat-label"/>
-                        <Label fx:id="totalRoomsLabel" text="0" styleClass="stat-value" textFill="#3498db"/>
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-border-color: #3b82f6; -fx-border-width: 0 0 0 4;">
+                        <Label text="Total Rooms" style="-fx-text-fill: #64748b; -fx-font-size: 13px;"/>
+                        <Label fx:id="totalRoomsLabel" text="0" style="-fx-text-fill: #3b82f6; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                     </VBox>
                     
-                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets bottom="15" left="15" right="15" top="15"/>
-                        </padding>
-                        <Label text="Available" styleClass="stat-label"/>
-                        <Label fx:id="availableRoomsLabel" text="0" styleClass="stat-value" textFill="#27ae60"/>
+                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-border-color: #10b981; -fx-border-width: 0 0 0 4;">
+                        <Label text="Available" style="-fx-text-fill: #64748b; -fx-font-size: 13px;"/>
+                        <Label fx:id="availableRoomsLabel" text="0" style="-fx-text-fill: #10b981; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                     </VBox>
                     
-                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets bottom="15" left="15" right="15" top="15"/>
-                        </padding>
-                        <Label text="Occupied" styleClass="stat-label"/>
-                        <Label fx:id="occupiedRoomsLabel" text="0" styleClass="stat-value" textFill="#e74c3c"/>
+                    <VBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-border-color: #e74c3c; -fx-border-width: 0 0 0 4;">
+                        <Label text="Occupied" style="-fx-text-fill: #64748b; -fx-font-size: 13px;"/>
+                        <Label fx:id="occupiedRoomsLabel" text="0" style="-fx-text-fill: #e74c3c; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                     </VBox>
                     
-                    <VBox styleClass="stat-card" spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets bottom="15" left="15" right="15" top="15"/>
-                        </padding>
-                        <Label text="Maintenance" styleClass="stat-label"/>
-                        <Label fx:id="maintenanceRoomsLabel" text="0" styleClass="stat-value" textFill="#f39c12"/>
+                    <VBox spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="0" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-border-color: #f39c12; -fx-border-width: 0 0 0 4;">
+                        <Label text="Maintenance" style="-fx-text-fill: #64748b; -fx-font-size: 13px;"/>
+                        <Label fx:id="maintenanceRoomsLabel" text="0" style="-fx-text-fill: #f39c12; -fx-font-size: 28px; -fx-font-weight: bold;"/>
                     </VBox>
                 </GridPane>
 
                 <!-- Rooms Table -->
-                <VBox spacing="10" VBox.vgrow="ALWAYS">
-                    <Label text="Rooms Inventory" styleClass="sub-header-label"/>
+                <VBox spacing="10" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                    <Label text="Rooms Inventory" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
                     <TableView fx:id="roomsTable" VBox.vgrow="ALWAYS" prefHeight="400">
                         <columns>
                             <TableColumn fx:id="roomNumberColumn" text="Room Number" prefWidth="120"/>
@@ -101,53 +101,45 @@
                         </columns>
                     </TableView>
                     
-                    <!-- Table Action Buttons -->
                     <HBox spacing="10">
-                        <Button text="Edit Selected" styleClass="warning-button" onAction="#editRoom"/>
-                        <Button text="Delete Selected" styleClass="danger-button" onAction="#deleteRoom"/>
-                        <Button text="Change Status" styleClass="button" onAction="#changeRoomStatus"/>
+                        <Button text="Edit Selected" onAction="#editRoom" style="-fx-background-color: #f59e0b; -fx-text-fill: white;"/>
+                        <Button text="Delete Selected" onAction="#deleteRoom" style="-fx-background-color: #ef4444; -fx-text-fill: white;"/>
+                        <Button text="Change Status" onAction="#changeRoomStatus" style="-fx-background-color: #3b82f6; -fx-text-fill: white;"/>
                     </HBox>
                 </VBox>
 
                 <!-- Room Form Panel (Hidden by default) -->
-                <VBox fx:id="roomFormPanel" spacing="15" styleClass="form-grid" visible="false" managed="false">
-                    <Label text="Room Details" styleClass="sub-header-label"/>
+                <VBox fx:id="roomFormPanel" spacing="20" managed="false" visible="false" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                    <Label text="Room Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
                     
-                    <GridPane hgap="15" vgap="15">
+                    <GridPane hgap="20" vgap="15">
                         <columnConstraints>
                             <ColumnConstraints minWidth="120" prefWidth="120"/>
-                            <ColumnConstraints minWidth="300" prefWidth="400" hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
                         </columnConstraints>
                         
-                        <!-- Room Number -->
-                        <Label text="Room Number:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="Room Number:"/>
                         <TextField fx:id="roomNumberField" promptText="e.g., 101, 202" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                         
-                        <!-- Room Type -->
-                        <Label text="Room Type:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <ComboBox fx:id="typeComboBox" promptText="Select room type" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Room Type:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="typeComboBox" promptText="Select room type" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                         
-                        <!-- Max Occupancy -->
-                        <Label text="Max Occupancy:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="Max Occupancy:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                         <TextField fx:id="maxOccupancyField" promptText="Maximum number of guests" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                         
-                        <!-- Price Per Night -->
-                        <Label text="Price/Night ($):" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label text="Price/Night ($):" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                         <TextField fx:id="pricePerNightField" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                         
-                        <!-- Status -->
-                        <Label text="Status:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                        <ComboBox fx:id="statusComboBox" promptText="Select room status" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="statusComboBox" promptText="Select room status" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                         
-                        <!-- Description -->
-                        <Label text="Description:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                         <TextArea fx:id="descriptionArea" promptText="Room features and amenities" wrapText="true" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
                     </GridPane>
                     
-                    <!-- Form Action Buttons -->
-                    <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Button text="Save Room" styleClass="primary-button" onAction="#saveRoom"/>
-                        <Button text="Cancel" styleClass="button" onAction="#cancelRoomForm"/>
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Cancel" onAction="#cancelRoomForm" style="-fx-background-color: white; -fx-border-color: #e2e8f0;"/>
+                        <Button text="Save Room" onAction="#saveRoom" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold;"/>
                     </HBox>
                 </VBox>
 
