@@ -26,9 +26,15 @@ Invoke-Expression $compileCommand
 if ($LASTEXITCODE -eq 0) {
     Write-Host "[2/3] Compilation successful!" -ForegroundColor Green
     
-    # Copy FXML files to bin directory
+    # Copy resources to bin directory
     Write-Host "[3/3] Copying resources..." -ForegroundColor Yellow
-    Copy-Item -Path "$SRC_DIR\com\hotel\view\*.fxml" -Destination "$OUT_DIR\com\hotel\view\" -Force -ErrorAction SilentlyContinue
+    # Create the view directory if it doesn't exist
+    $VIEW_DEST = "$OUT_DIR\com\hotel\view"
+    if (!(Test-Path $VIEW_DEST)) {
+        New-Item -ItemType Directory -Path $VIEW_DEST | Out-Null
+    }
+    # Copy all files from view directory (FXML, CSS, PNG, etc.)
+    Copy-Item -Path "$SRC_DIR\com\hotel\view\*" -Destination "$VIEW_DEST\" -Force -ErrorAction SilentlyContinue
     
     Write-Host ""
     Write-Host "Starting application..." -ForegroundColor Cyan
