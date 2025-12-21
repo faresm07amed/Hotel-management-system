@@ -6,55 +6,63 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.hotel.controller.ServiceController">
+            fx:controller="com.hotel.controller.ServiceController"
+            style="-fx-background-image: url('dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
     
-    <!-- Top Navigation Bar -->
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-panel" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets bottom="15" left="20" right="20" top="15"/>
-            </padding>
-            <Label text="Hotel Management System" styleClass="header-label" textFill="white"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Dashboard" styleClass="nav-button" onAction="#goToDashboard"/>
-            <Button text="Guests" styleClass="nav-button" onAction="#goToGuests"/>
-            <Button text="Rooms" styleClass="nav-button" onAction="#goToRooms"/>
-            <Button text="Reservations" styleClass="nav-button" onAction="#goToReservations"/>
-            <Button text="Payments" styleClass="nav-button" onAction="#goToPayments"/>
-            <Button text="Services" styleClass="nav-button" onAction="#goToServices"/>
-        </HBox>
-    </top>
+    <!-- Left Sidebar Navigation -->
+    <left>
+        <VBox style="-fx-background-color: #236023; -fx-min-width: 250px; -fx-max-width: 250px;">
+            <VBox style="-fx-background-color: #344E41D4; -fx-padding: 20;">
+                <Label text="Hotel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="Management" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            </VBox>
+            
+            <VBox spacing="2">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🏠 Rooms" onAction="#goToRooms" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="📅 Reservations" onAction="#goToReservations" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="💰 Payments" onAction="#goToPayments" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🛎️ Services" onAction="#goToServices" maxWidth="Infinity"
+                        style="-fx-background-color: #FFEDD8; -fx-text-fill: #588157; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT; -fx-font-weight: bold;"/>
+            </VBox>
+        </VBox>
+    </left>
 
     <!-- Main Content -->
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
-            <VBox spacing="25" styleClass="content-panel">
-                <padding>
-                    <Insets bottom="30" left="30" right="30" top="30"/>
-                </padding>
-
+        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #F3EDDF; -fx-background: #F3EDDF;">
+            <VBox spacing="25" style="-fx-padding: 30;">
+                
                 <!-- Header Section -->
-                <VBox spacing="10">
-                    <Label text="Services Management" styleClass="header-label"/>
-                    <Label text="Manage hotel services and amenities catalog" styleClass="sub-header-label"/>
+                <VBox spacing="8">
+                    <Label text="Services Management" style="-fx-text-fill: #0f172a; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label text="Manage hotel services and amenities catalog" style="-fx-text-fill: #64748b; -fx-font-size: 14px; "/>
                 </VBox>
 
                 <!-- Search and Filter Section -->
                 <HBox spacing="15" alignment="CENTER_LEFT">
-                    <TextField fx:id="searchField" promptText="Search services..." prefWidth="300" onKeyReleased="#searchServices"/>
-                    <Button text="Search" styleClass="button" onAction="#searchServices"/>
-                    <Button text="Clear" styleClass="button" onAction="#clearSearch"/>
+                    <TextField fx:id="searchField" promptText="Search services..." prefWidth="300" onKeyReleased="#searchServices" style="-fx-background-color: white; -fx-background-radius: 8px;"/>
+                    <Button text="Search" onAction="#searchServices" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px;"/>
+                    <Button text="Clear" onAction="#clearSearch" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Label text="Filter by Category:" styleClass="form-label"/>
                     <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="180" onAction="#filterByCategory"/>
-                    <CheckBox fx:id="activeOnlyCheckbox" text="Active Only" selected="true" onAction="#refreshServices"/>
-                    <Button text="Add Service" styleClass="primary-button" onAction="#showAddServiceForm"/>
-                    <Button text="Refresh" styleClass="button" onAction="#refreshServices"/>
+                    <CheckBox fx:id="activeOnlyCheckbox" text="Active Only" selected="true" onAction="#refreshServices" style="-fx-text-fill: #0f172a;"/>
+                    <Button text="+ Add Service" onAction="#showAddServiceForm" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-font-weight: bold;"/>
+                    <Button text="🔄 Refresh" onAction="#refreshServices" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
                 </HBox>
 
                 <!-- Services Table -->
-                <VBox spacing="10" VBox.vgrow="ALWAYS">
-                    <Label text="Services Catalog" styleClass="sub-header-label"/>
+                <VBox spacing="10" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                    <Label text="Services Catalog" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
                     <TableView fx:id="servicesTable" VBox.vgrow="ALWAYS" prefHeight="400">
                         <columns>
                             <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
@@ -66,49 +74,42 @@
                         </columns>
                     </TableView>
                     
-                    <!-- Table Action Buttons -->
                     <HBox spacing="10">
-                        <Button text="Edit Selected" styleClass="warning-button" onAction="#editService"/>
-                        <Button text="Delete Selected" styleClass="danger-button" onAction="#deleteService"/>
-                        <Button text="Toggle Active Status" styleClass="button" onAction="#toggleServiceStatus"/>
+                        <Button text="Edit Selected" onAction="#editService" style="-fx-background-color: #f59e0b; -fx-text-fill: white;"/>
+                        <Button text="Delete Selected" onAction="#deleteService" style="-fx-background-color: #ef4444; -fx-text-fill: white;"/>
+                        <Button text="Toggle Status" onAction="#toggleServiceStatus" style="-fx-background-color: #3b82f6; -fx-text-fill: white;"/>
                     </HBox>
                 </VBox>
 
                 <!-- Service Form Panel (Hidden by default) -->
-                <VBox fx:id="serviceFormPanel" spacing="15" styleClass="form-grid" visible="false" managed="false">
-                    <Label text="Service Details" styleClass="sub-header-label"/>
+                <VBox fx:id="serviceFormPanel" spacing="20" managed="false" visible="false" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                    <Label text="Service Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
                     
-                    <GridPane hgap="15" vgap="15">
+                    <GridPane hgap="20" vgap="15">
                         <columnConstraints>
                             <ColumnConstraints minWidth="120" prefWidth="120"/>
-                            <ColumnConstraints minWidth="300" prefWidth="400" hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
                         </columnConstraints>
                         
-                        <!-- Service Name -->
-                        <Label text="Service Name:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="Service Name:"/>
                         <TextField fx:id="nameField" promptText="Enter service name" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                         
-                        <!-- Category -->
-                        <Label text="Category:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <ComboBox fx:id="categoryComboBox" promptText="Select category" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Category:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="categoryComboBox" promptText="Select category" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                         
-                        <!-- Price -->
-                        <Label text="Price ($):" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="Price ($):" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                         <TextField fx:id="priceField" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                         
-                        <!-- Description -->
-                        <Label text="Description:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                         <TextArea fx:id="descriptionArea" promptText="Enter service description" wrapText="true" prefRowCount="4" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                         
-                        <!-- Active Status -->
-                        <Label text="Active:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <Label text="Active:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
                         <CheckBox fx:id="isActiveCheckbox" text="Service is active and available" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                     </GridPane>
                     
-                    <!-- Form Action Buttons -->
-                    <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Button text="Save Service" styleClass="primary-button" onAction="#saveService"/>
-                        <Button text="Cancel" styleClass="button" onAction="#cancelServiceForm"/>
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Cancel" onAction="#cancelServiceForm" style="-fx-background-color: white; -fx-border-color: #e2e8f0;"/>
+                        <Button text="Save Service" onAction="#saveService" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold;"/>
                     </HBox>
                 </VBox>
 
