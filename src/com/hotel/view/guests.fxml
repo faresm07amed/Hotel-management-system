@@ -5,81 +5,106 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.hotel.controller.GuestController">
+            fx:controller="com.hotel.controller.GuestController"
+            style="-fx-background-image: url('dashboard-bg.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
     
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-panel" BorderPane.alignment="CENTER">
-            <padding><Insets bottom="15" left="20" right="20" top="15"/></padding>
-            <Label text="Hotel Management System" styleClass="header-label" textFill="white"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Dashboard" styleClass="nav-button" onAction="#goToDashboard"/>
-            <Button text="Guests" styleClass="nav-button" onAction="#goToGuests"/>
-            <Button text="Rooms" styleClass="nav-button" onAction="#goToRooms"/>
-            <Button text="Reservations" styleClass="nav-button" onAction="#goToReservations"/>
-            <Button text="Payments" styleClass="nav-button" onAction="#goToPayments"/>
-            <Button text="Services" styleClass="nav-button" onAction="#goToServices"/>
-        </HBox>
-    </top>
-
-    <center>
-        <VBox spacing="20" styleClass="content-panel">
-            <padding><Insets bottom="30" left="30" right="30" top="30"/></padding>
-
-            <Label text="Guest Management" styleClass="header-label"/>
-
-            <!-- Toolbar -->
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <TextField fx:id="searchField" promptText="Search guests..." prefWidth="300"/>
-                <Button text="Search" styleClass="button" onAction="#searchGuests"/>
-                <Button text="Clear" styleClass="button" onAction="#clearSearch"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Button text="Add Guest" styleClass="primary-button" onAction="#showAddGuestForm"/>
-                <Button text="Edit" styleClass="button" onAction="#editGuest"/>
-                <Button text="Delete" styleClass="danger-button" onAction="#deleteGuest"/>
-                <Button text="Refresh" styleClass="button" onAction="#refreshGuests"/>
-            </HBox>
-
-            <!-- Table -->
-            <TableView fx:id="guestsTable" VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
-                    <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="120"/>
-                    <TableColumn fx:id="lastNameColumn" text="Last Name" prefWidth="120"/>
-                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="200"/>
-                    <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="150"/>
-                    <TableColumn fx:id="idNumberColumn" text="ID Number" prefWidth="120"/>
-                    <TableColumn fx:id="addressColumn" text="Address" prefWidth="200"/>
-                </columns>
-            </TableView>
-
-            <!-- Form (hidden by default) -->
-            <VBox fx:id="guestFormPanel" spacing="15" styleClass="form-grid" managed="false" visible="false">
-                <Label text="Guest Information" styleClass="sub-header-label"/>
-                <GridPane hgap="15" vgap="15">
-                    <Label text="First Name:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                    
-                    <Label text="Last Name:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                    
-                    <Label text="Email:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                    
-                    <Label text="Phone:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                    <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                    
-                    <Label text="ID Number:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                    <TextField fx:id="idNumberField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                    
-                    <Label text="Address:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                    <TextArea fx:id="addressArea" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                </GridPane>
-                
-                <HBox spacing="10" alignment="CENTER">
-                    <Button text="Save" styleClass="primary-button" onAction="#saveGuest"/>
-                    <Button text="Cancel" styleClass="button" onAction="#cancelGuestForm"/>
-                </HBox>
+    <!-- Left Sidebar Navigation -->
+    <left>
+        <VBox style="-fx-background-color: #236023; -fx-min-width: 250px; -fx-max-width: 250px;">
+            <VBox style="-fx-background-color: #344E41D4; -fx-padding: 20;">
+                <Label text="Hotel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="Management" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            </VBox>
+            
+            <VBox spacing="2">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <Button text="📊 Dashboard" onAction="#goToDashboard" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="👥 Guests" onAction="#goToGuests" maxWidth="Infinity"
+                        style="-fx-background-color: #FFEDD8; -fx-text-fill: #588157; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT; -fx-font-weight: bold;"/>
+                <Button text="🏠 Rooms" onAction="#goToRooms" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="📅 Reservations" onAction="#goToReservations" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="💰 Payments" onAction="#goToPayments" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
+                <Button text="🛎️ Services" onAction="#goToServices" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #FFEDD8; -fx-padding: 12 20; -fx-alignment: CENTER_LEFT;"/>
             </VBox>
         </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #F3EDDF; -fx-background: #F3EDDF;">
+            <VBox spacing="25" style="-fx-padding: 30;">
+                <VBox spacing="8">
+                    <Label text="Guest Management" style="-fx-text-fill: #0f172a; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label text="Manage hotel guests and registration information" style="-fx-text-fill: #64748b; -fx-font-size: 14px; "/>
+                </VBox>
+
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField" promptText="Search guests..." prefWidth="350" style="-fx-background-color: white; -fx-background-radius: 8px;"/>
+                    <Button text="Search" onAction="#searchGuests" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px;"/>
+                    <Button text="Clear" onAction="#clearSearch" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="+ Add Guest" onAction="#showAddGuestForm" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-font-weight: bold;"/>
+                    <Button text="🔄 Refresh" onAction="#refreshGuests" style="-fx-background-color: white; -fx-text-fill: #0f172a; -fx-padding: 8 20; -fx-background-radius: 8px; -fx-border-color: #e2e8f0;"/>
+                </HBox>
+
+                <VBox spacing="10" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                    <TableView fx:id="guestsTable" VBox.vgrow="ALWAYS" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="120"/>
+                            <TableColumn fx:id="lastNameColumn" text="Last Name" prefWidth="120"/>
+                            <TableColumn fx:id="emailColumn" text="Email" prefWidth="200"/>
+                            <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="150"/>
+                            <TableColumn fx:id="idNumberColumn" text="ID Number" prefWidth="120"/>
+                            <TableColumn fx:id="addressColumn" text="Address" prefWidth="250"/>
+                        </columns>
+                    </TableView>
+                    
+                    <HBox spacing="10">
+                        <Button text="Edit Selected" onAction="#editGuest" style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 6px;"/>
+                        <Button text="Delete Selected" onAction="#deleteGuest" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 6px;"/>
+                    </HBox>
+                </VBox>
+
+                <VBox fx:id="guestFormPanel" spacing="20" managed="false" visible="false" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                    <Label text="Guest Information" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <GridPane hgap="20" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="120" prefWidth="120"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        
+                        <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        
+                        <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        
+                        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        
+                        <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        
+                        <Label text="ID Number:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField fx:id="idNumberField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        
+                        <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextArea fx:id="addressArea" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+                    
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Cancel" onAction="#cancelGuestForm" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-background-radius: 6px;"/>
+                        <Button text="Save Guest" onAction="#saveGuest" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-background-radius: 6px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
     </center>
 </BorderPane>
